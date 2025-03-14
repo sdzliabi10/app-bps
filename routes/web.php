@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/profil-desa', [ProfilDesaController::class, 'index'])->name('profil-desa');
 
+
 Route::get('/dashboard', function () {
     return view('/admin/dashboard');
 });
