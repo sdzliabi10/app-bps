@@ -3,7 +3,6 @@
 @section('title', 'Dashboard')
 
 @section('content')
-
 <main>
     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
         <div class="container-xl px-4">
@@ -20,10 +19,63 @@
             </div>
         </div>
     </header>
-    <!-- Main page content-->
+
     <div class="container-xl px-4 mt-n10">
+        <!-- Filter Form -->
         <div class="card mb-4">
-            <div class="card-header">Informasi Kecamatan dan Desa</div>
+            <div class="card-header">
+                Filter Data
+            </div>
+            <div class="card-body">
+                <form method="GET" action="{{ route('profil-desa.index') }}">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="kecamatan" class="form-label">Kecamatan</label>
+                            <select class="form-select" id="kecamatan" name="kecamatan">
+                                <option value="">Pilih Kecamatan</option>
+                                @foreach ($kecamatanList as $kecamatan)
+                                    <option value="{{ $kecamatan->kdkec }}" {{ request('kecamatan') == $kecamatan->kdkec ? 'selected' : '' }}>
+                                        {{ $kecamatan->nmkec }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="desa" class="form-label">Desa</label>
+                            <select class="form-select" id="desa" name="desa">
+                                <option value="">Pilih Desa</option>
+                                @foreach ($desaList as $desa)
+                                    <option value="{{ $desa->iddesa }}" {{ request('desa') == $desa->iddesa ? 'selected' : '' }}>
+                                        {{ $desa->nmdesa }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        {{-- <div class="col-md-4">
+                            <label for="tahun" class="form-label">Tahun</label>
+                            <select class="form-select" id="tahun" name="tahun">
+                                <option value="">Pilih Tahun</option>
+                                @for ($i = date('Y'); $i >= 2024; $i--)
+                                    <option value="{{ $i }}" {{ request('tahun') == $i ? 'selected' : '' }}>
+                                        {{ $i }}
+                                    </option>
+                                @endfor
+                            </select>
+                        </div> --}}
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Tampilkan Data</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Informasi Kecamatan dan Desa
+                <a href="{{ route('profil-desa.create') }}" class="btn btn-primary btn-sm float-end">Tambah Desa</a>
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="datatablesSimple" class="table table-hover">
@@ -31,8 +83,9 @@
                             <tr>
                                 <th>Kecamatan</th>
                                 <th>Desa</th>
-                                <th>Tahun</th>
-                                <th>Visi & Misi</th>
+                                {{-- <th>Tahun</th> --}}
+                                <th>Visi</th>
+                                <th>Misi</th>
                                 <th>Program Unggulan</th>
                                 <th>Batas Wilayah</th>
                                 <th>Alamat</th>
@@ -41,69 +94,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Kecamatan A</td>
-                                <td>Desa A1</td>
-                                <td>2023</td>
-                                <td>Visi: Mewujudkan desa sejahtera. Misi: Peningkatan kualitas hidup.</td>
-                                <td>Program Pemberdayaan Masyarakat, Pendidikan, Kesehatan</td>
-                                <td>Utara: Desa B1, Timur: Desa C1, Selatan: Desa D1, Barat: Desa E1</td>
-                                <td>Jl. Raya No.1, Desa A1</td>
-                                <td>(021) 12345678</td>
-                                <td>
-                                    <button class="btn btn-primary btn-icon" type="button">
-                                        <i class="fas fa-eye"></i> <!-- Show Icon -->
-                                    </button>
-                                    <button class="btn btn-warning btn-icon" type="button">
-                                        <i class="fas fa-edit"></i> <!-- Edit Icon -->
-                                    </button>
-                                    <button class="btn btn-danger btn-icon" type="button">
-                                        <i class="fas fa-trash"></i> <!-- Delete Icon -->
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Kecamatan B</td>
-                                <td>Desa B2</td>
-                                <td>2023</td>
-                                <td>Visi: Menjadi desa ramah lingkungan. Misi: Menjaga kelestarian alam.</td>
-                                <td>Program Pengelolaan Sampah, Konservasi Alam</td>
-                                <td>Utara: Desa F2, Timur: Desa G2, Selatan: Desa H2, Barat: Desa I2</td>
-                                <td>Jl. Merdeka No.2, Desa B2</td>
-                                <td>(022) 23456789</td>
-                                <td>
-                                    <button class="btn btn-primary btn-icon" type="button">
-                                        <i class="fas fa-eye"></i> <!-- Show Icon -->
-                                    </button>
-                                    <button class="btn btn-warning btn-icon" type="button">
-                                        <i class="fas fa-edit"></i> <!-- Edit Icon -->
-                                    </button>
-                                    <button class="btn btn-danger btn-icon" type="button">
-                                        <i class="fas fa-trash"></i> <!-- Delete Icon -->
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Kecamatan C</td>
-                                <td>Desa C3</td>
-                                <td>2023</td>
-                                <td>Visi: Pembangunan Infrastruktur Desa. Misi: Meningkatkan sarana dan prasarana.</td>
-                                <td>Program Infrastruktur Desa, Peningkatan Transportasi</td>
-                                <td>Utara: Desa J3, Timur: Desa K3, Selatan: Desa L3, Barat: Desa M3</td>
-                                <td>Jl. Sejahtera No.3, Desa C3</td>
-                                <td>(023) 34567890</td>
-                                <td>
-                                    <button class="btn btn-primary btn-icon" type="button">
-                                        <i class="fas fa-eye"></i> <!-- Show Icon -->
-                                    </button>
-                                    <button class="btn btn-warning btn-icon" type="button">
-                                        <i class="fas fa-edit"></i> <!-- Edit Icon -->
-                                    </button>
-                                    <button class="btn btn-danger btn-icon" type="button">
-                                        <i class="fas fa-trash"></i> <!-- Delete Icon -->
-                                    </button>
-                                </td>
-                            </tr>
+                            @foreach($profilDesas as $profilDesa)
+                                <tr>
+                                    <td>{{ $profilDesa->desa->kecamatan->nmkec }}</td>
+                                    <td>{{ $profilDesa->desa->nmdesa }}</td>
+                                    {{-- <td>{{ $profilDesa->created_at->year }}</td> --}}
+                                    <td>{{ Str::limit($profilDesa->visi, 50) }}</td>
+                                    <td>{{ Str::limit($profilDesa->misi, 50) }}</td>
+                                    <td>{{ Str::limit($profilDesa->program_unggulan, 50) }}</td>
+                                    <td>{{ Str::limit($profilDesa->batas_wilayah, 50) }}</td>
+                                    <td>{{ Str::limit($profilDesa->alamat, 50) }}</td>
+                                    <td>{{ Str::limit($profilDesa->kontak, 50) }}</td>
+                                    <td>
+                                        <a href="{{ route('profil-desa.edit', $profilDesa->id) }}" class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a>
+                                        <form action="{{ route('profil-desa.destroy', $profilDesa->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash"></i> Hapus
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -111,9 +126,13 @@
         </div>
     </div>
 </main>
-
 @endsection
 
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        new simpleDatatables.DataTable("#datatablesSimple");
+    });
+</script>
 @endsection
