@@ -10,9 +10,10 @@ Route::get('/', function () {
     return view('/admin/dashboard');
 });
 
-Route::get('/profil-desa', [ProfilDesaController::class, 'Index'])->name('profil.desa');
+// Route::get('/profil-desa', [ProfilDesaController::class, 'Index'])->name('profil.desa');
 
-Route::resource('admin-profil-desa', ProfilDesaController::class);
+// Route::resource('admin-profil-desa', ProfilDesaController::class);
+Route::resource('profil-desa', ProfilDesaController::class);
 
 // Route::get('/admin-profil', function () {
 //     return view('/admin/profil-desa/index');

@@ -8,7 +8,7 @@
         <div class="card mb-4">
             <div class="card-header">Tambah Profil Desa</div>
             <div class="card-body">
-                <form method="POST" action="{{ route('admin-profil-desa.store') }}">
+                <form method="POST" action="{{ route('profil-desa.store') }}">
                     @csrf
                     <div class="mb-3">
                         <label for="kecamatan" class="form-label">Kecamatan</label>

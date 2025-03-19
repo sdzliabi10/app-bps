@@ -9,16 +9,17 @@ class ProfilDesa extends Model
 {
     use HasFactory;
 
+    // Nama tabel (optional)
     protected $table = 'profil_desas';
 
+    // Kolom yang dapat diisi (mass assignable)
     protected $fillable = [
-        'kecamatan',
-        'desa',
-        'tahun',    
-        'visi_misi',
-        'program_unggulan',
-        'batas_wilayah',
-        'alamat',
-        'telepon',
+        'kddesa', 'visi', 'misi', 'program_unggulan', 'batas_wilayah', 'alamat', 'kontak',
     ];
+
+    // Relasi ke tabel Desa
+    public function desa()
+    {
+        return $this->belongsTo(Desa::class, 'kddesa', 'iddesa');
+    }
 }

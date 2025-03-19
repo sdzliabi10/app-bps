@@ -32,4 +32,35 @@
     </div>
 
 </body>
+<script>
+    function filterDesa() {
+        var selectedKecamatan = document.getElementById("kecamatan").value;
+        var desaDropdown = document.getElementById("desa");
+        var options = desaDropdown.getElementsByTagName("option");
+
+        if (selectedKecamatan === "") {
+            desaDropdown.disabled = true;
+            for (var i = 0; i < options.length; i++) {
+                options[i].style.display = "none"; 
+            }
+        } else {
+            desaDropdown.disabled = false;
+            for (var i = 0; i < options.length; i++) {
+                var kecamatanAttr = options[i].getAttribute("data-kecamatan");
+
+                if (kecamatanAttr === selectedKecamatan) {
+                    options[i].style.display = "";
+                } else {
+                    options[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        filterDesa();
+    });
+</script>
+
+
 </html>
