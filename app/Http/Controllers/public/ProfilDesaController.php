@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Kecamatan;
 use App\Models\Desa;
 use App\Models\ProfilDesa;
+use App\Models\PerangkatDesa;
 
 class ProfilDesaController extends Controller
 {
@@ -15,7 +16,7 @@ class ProfilDesaController extends Controller
     {
         $kecamatanList = Kecamatan::all();
         $desaList = Desa::all();
-        $perangkat = [];
+        $perangkat = PerangkatDesa::all();                        
         $keuangan = [];
         $bpd = [];
 

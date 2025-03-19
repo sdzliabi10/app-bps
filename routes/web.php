@@ -9,6 +9,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/profil-desa', [ProfilDesaController::class, 'Index'])->name("profil-desa");
 Route::get('/profil-desa', [ProfilDesaController::class, 'showProfilDesa'])->name('profil-desa');
+// Route::get('/pera-desa', [ProfilDesaController::class, 'showProfilDesa'])->name('profil-desa');
 
 
 // Route::get('/getDesaByKecamatan', function (Request $request) {
