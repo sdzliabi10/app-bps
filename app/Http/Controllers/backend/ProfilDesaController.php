@@ -34,7 +34,6 @@ class ProfilDesaController extends Controller
                 return $query->whereYear('created_at', $request->tahun);
             })
             ->get();
-            
 
         // Mengirimkan data ke tampilan
         return view('admin.profil-desa.index', compact('profilDesas', 'kecamatanList', 'desaList'));
@@ -43,8 +42,11 @@ class ProfilDesaController extends Controller
     // Menambahkan profil desa baru
     public function create()
     {
-        return view('admin.profil-desa.create');
+        $kecamatanList = Kecamatan::all(); // Ambil semua data kecamatan
+        $desaList = Desa::all();
+        return view('admin.profil-desa.create', compact('kecamatanList', 'desaList'));
     }
+
 
     // Menyimpan profil desa baru
     public function store(Request $request)
@@ -59,9 +61,19 @@ class ProfilDesaController extends Controller
             'kontak' => 'required',
         ]);
 
-        ProfilDesa::create($request->all());
+        ProfilDesa::create([
+            'kddesa' => $request->kddesa,
+            'visi' => $request->visi,
+            'misi' => $request->misi,
+            'program_unggulan' => $request->program_unggulan,
+            'batas_wilayah' => $request->batas_wilayah,
+            'alamat' => $request->alamat,
+            'kontak' => $request->kontak,
+        ]);
+
         return redirect()->route('profil-desa.index');
     }
+
 
     // Menampilkan form untuk mengedit profil desa
     public function edit(ProfilDesa $profilDesa)
