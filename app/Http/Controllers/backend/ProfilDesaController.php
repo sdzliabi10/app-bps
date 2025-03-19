@@ -34,6 +34,7 @@ class ProfilDesaController extends Controller
                 return $query->whereYear('created_at', $request->tahun);
             })
             ->get();
+            
 
         // Mengirimkan data ke tampilan
         return view('admin.profil-desa.index', compact('profilDesas', 'kecamatanList', 'desaList'));
