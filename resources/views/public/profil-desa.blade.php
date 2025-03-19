@@ -250,228 +250,313 @@
                 </div>
             </div>
 
+            {{-- BPD --}}
+            <div id="bpd" class="content-section hidden mt-6">
+                <h1 class="text-3xl font-bold text-gray-800 mb-4">Badan Permusyawaratan Desa (BPD)</h1>
+
+                <div class="relative p-6 rounded-lg shadow-md border">
+                    <!-- Wrapper untuk Scroll Horizontal di Mobile -->
+                    <div class="overflow-x-auto scroll-smooth scrollbar-hide p-2">
+                        <div class="flex space-x-4 md:grid md:grid-cols-3 lg:grid-cols-4 md:gap-6">
+                            @if (empty($bpd))
+                                <!-- Template Kosong dengan Style Tetap -->
+                                <div
+                                    class="min-w-[250px] md:w-full bg-white shadow-lg rounded-xl overflow-hidden p-4 border">
+                                    <div class="rounded-lg flex items-center justify-center h-56 border">
+                                        <span class="text-gray-500">Foto</span>
+                                    </div>
+                                    <div class="p-4 text-center space-y-1">
+                                        <h3 class="text-lg font-bold leading-tight">Nama</h3>
+                                        <p class="text-sm leading-tight">Jabatan</p>
+                                    </div>
+                                </div>
+                                <p class="mt-4 text-center w-full">Belum ada data BPD. Silakan tambahkan melalui panel
+                                    admin.</p>
+                            @else
+                                @foreach ($bpd as $b)
+                                    <div
+                                        class="min-w-[250px] md:w-full bg-white shadow-lg rounded-xl overflow-hidden p-4 border">
+                                        <div class="rounded-lg overflow-hidden border">
+                                            <img src="{{ asset('images/' . $b['foto']) }}" alt="{{ $b['nama'] }}"
+                                                class="w-full h-56 object-cover">
+                                        </div>
+                                        <div class="p-4 text-center space-y-1">
+                                            <h3 class="text-lg font-bold leading-tight">{{ $b['nama'] }}</h3>
+                                            <p class="text-sm leading-tight">{{ $b['jabatan'] }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Kelembagaan Desa --}}
+            <div id="kelembagaan" class="content-section hidden">
+                <h1 class="text-3xl font-bold text-gray-800 mb-6">Kelembagaan Desa</h1>
+
+                <!-- Tabel LPMD/LPMK -->
+                <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">LPMD/LPMK</h2>
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                    Data</th>
+                                <th
+                                    class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                    Jumlah</th>
+                                <th
+                                    class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                    Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">Jumlah Pengurus</td>
+                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">6</td>
+                                <td class="py-2 px-4 border-b border-gray-200">
+                                    <button onclick="openModal('LPMD')"
+                                        class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition duration-300">Lihat
+                                        Detail</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">Jumlah Anggota</td>
+                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">20</td>
+                                <td class="py-2 px-4 border-b border-gray-200">
+                                    <button onclick="openModal('LPMD')"
+                                        class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition duration-300">Lihat
+                                        Detail</button>
+                                </td>
+                            </tr>
+                            <!-- Tambahkan baris lainnya sesuai kebutuhan -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Tabel TP PKK Desa -->
+                <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">TP PKK Desa</h2>
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                    Data</th>
+                                <th
+                                    class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                    Jumlah</th>
+                                <th
+                                    class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                    Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">Jumlah Pengurus</td>
+                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">20</td>
+                                <td class="py-2 px-4 border-b border-gray-200">
+                                    <button onclick="openModal('PKK')"
+                                        class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition duration-300">Lihat
+                                        Detail</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">Jumlah Anggota</td>
+                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">60</td>
+                                <td class="py-2 px-4 border-b border-gray-200">
+                                    <button onclick="openModal('PKK')"
+                                        class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition duration-300">Lihat
+                                        Detail</button>
+                                </td>
+                            </tr>
+                            <!-- Tambahkan baris lainnya sesuai kebutuhan -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Modal -->
+                <div id="modal"
+                    class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center p-4 z-50 hidden">
+                    <div class="bg-white rounded-lg w-full max-w-md overflow-hidden shadow-xl transform transition-all">
+                        <div class="flex justify-between items-center bg-blue-500 text-white p-4">
+                            <h3 class="text-xl font-semibold">Detail Data</h3>
+                            <button onclick="closeModal()"
+                                class="text-white hover:text-gray-200 text-2xl">&times;</button>
+                        </div>
+                        <div id="modal-content" class="p-6">
+                            <!-- Tabel untuk Nama dan Deskripsi -->
+                            <table class="min-w-full bg-white">
+                                <thead>
+                                    <tr>
+                                        <th
+                                            class="py-2 px-4 border border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                            Nama</th>
+                                        <th
+                                            class="py-2 px-4 border border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                            Deskripsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="py-2 px-4 border border-gray-200 text-sm text-gray-700">ARGO INTEN</td>
+                                        <td class="py-2 px-4 border border-gray-200 text-sm text-gray-700">BERGERAK
+                                            DIBIDANG WISATA MAKANAN LOKAL JASA NOMOR ; AHU-04143.AH 01.33 TH 2022</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="bg-gray-50 px-6 py-4 flex justify-end">
+                            <button onclick="closeModal()"
+                                class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-300">Tutup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- INFRASTRUKTUR --}}
+            <div id="infrastruktur" class="content-section hidden">
+                <h1 class="text-3xl font-bold text-gray-800">Infrastruktur</h1>
+                <p class="mt-4 text-gray-600">Informasi mengenai infrastruktur desa...</p>
+            </div>
+
+            <div id="transparansi" class="content-section hidden">
+                <h1 class="text-3xl font-bold text-gray-800">Transparansi</h1>
+                <p class="mt-4 text-gray-600">Informasi transparansi desa...</p>
+            </div>
+
+            <div id="program-tidak-mampu" class="content-section hidden">
+                <h1 class="text-3xl font-bold text-gray-800">Program Tidak Mampu</h1>
+                <p class="mt-4 text-gray-600">Informasi mengenai program untuk warga tidak mampu...</p>
+            </div>
         </div>
 
-        <div id="infrastruktur" class="content-section hidden">
-    <h1 class="text-3xl font-bold text-gray-800">Infrastruktur</h1>
-    <p class="mt-4 text-gray-600">Informasi mengenai infrastruktur desa...</p>
+        @if (!request()->has('kecamatan') && !request()->has('desa'))
+            <!-- Bagian Visi dan Misi Desa -->
+            <div class="mt-12 p-6 bg-white shadow-lg rounded-lg border border-gray-200">
+                <h2 class="text-2xl font-bold text-green-800 text-center">Visi dan Misi Kabupaten</h2>
+                <div class="mt-6 flex flex-col md:flex-row items-center gap-6">
+                    <div class="w-full md:w-1/2">
+                        <img src="{{ asset('images/kantorbbs.jpg') }}" alt="Visi dan Misi"
+                            class="w-full rounded-lg shadow-md">
+                    </div>
+                    <div class="w-full md:w-1/2 space-y-4">
+                        <div class="bg-gradient-to-r from-green-100 to-green-300 p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-semibold text-green-900">Visi</h3>
+                            <p class="text-gray-800 mt-2 italic">
+                                "Mewujudkan desa yang maju, mandiri, dan sejahtera berbasis kearifan lokal serta partisipasi
+                                masyarakat."
+                            </p>
+                        </div>
+                        <div class="bg-gradient-to-r from-gray-100 to-gray-300 p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-semibold text-green-900">Misi</h3>
+                            <ul class="list-disc list-inside text-gray-800 mt-2 space-y-1">
+                                <li>Meningkatkan kesejahteraan masyarakat melalui pembangunan ekonomi.</li>
+                                <li>Memperkuat nilai budaya dan kearifan lokal.</li>
+                                <li>Meningkatkan kualitas pendidikan dan kesehatan.</li>
+                                <li>Membangun infrastruktur desa yang berkelanjutan.</li>
+                                <li>Meningkatkan partisipasi aktif masyarakat dalam pembangunan desa.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <table class="mt-6 w-full border-collapse border border-gray-300">
-        <thead>
-            <tr class="bg-gray-200">
-                <th class="border border-gray-300 p-2 text-left">Kategori</th>
-                <th class="border border-gray-300 p-2 text-left">Nilai</th>
-                <th class="border border-gray-300 p-2 text-left">Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="border border-gray-300 p-2">Jumlah Jembatan</td>
-                <td class="border border-gray-300 p-2">12</td>
-                <td class="border border-gray-300 p-2">
-                    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat Detail</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="border border-gray-300 p-2">Tempat Pembuangan Sampah</td>
-                <td class="border border-gray-300 p-2">-</td>
-                <td class="border border-gray-300 p-2">
-                    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat Detail</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="border border-gray-300 p-2">Kapasitas</td>
-                <td class="border border-gray-300 p-2">0</td>
-                <td class="border border-gray-300 p-2">
-                    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat Detail</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="border border-gray-300 p-2">Kapasitas</td>
-                <td class="border border-gray-300 p-2">3</td>
-                <td class="border border-gray-300 p-2">
-                    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat Detail</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="border border-gray-300 p-2">Jumlah Pasar</td>
-                <td class="border border-gray-300 p-2">0</td>
-                <td class="border border-gray-300 p-2">
-                    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat Detail</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="border border-gray-300 p-2">Jumlah Jalan Desa</td>
-                <td class="border border-gray-300 p-2">26</td>
-                <td class="border border-gray-300 p-2">
-                    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat Detail</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="border border-gray-300 p-2">Jumlah Jalan Kabupaten</td>
-                <td class="border border-gray-300 p-2">1</td>
-                <td class="border border-gray-300 p-2">
-                    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat Detail</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="border border-gray-300 p-2">Jumlah Irigasi</td>
-                <td class="border border-gray-300 p-2">22</td>
-                <td class="border border-gray-300 p-2">
-                    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat Detail</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="border border-gray-300 p-2">Jumlah Pusat Perdagangan</td>
-                <td class="border border-gray-300 p-2">0</td>
-                <td class="border border-gray-300 p-2">
-                    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat Detail</button>
-                </td>
-            </tr>
-            <tr>
-                <td class="border border-gray-300 p-2">Jumlah Rumah Potong Hewan</td>
-                <td class="border border-gray-300 p-2">0</td>
-                <td class="border border-gray-300 p-2">
-                    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat Detail</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-        <div id="transparansi" class="content-section hidden">
-            <h1 class="text-3xl font-bold text-gray-800">Transparansi</h1>
-            <p class="mt-4 text-gray-600">Informasi transparansi desa...</p>
-        </div>
-
-        <div id="program-tidak-mampu" class="content-section hidden">
-            <h1 class="text-3xl font-bold text-gray-800">Program Tidak Mampu</h1>
-            <p class="mt-4 text-gray-600">Informasi mengenai program untuk warga tidak mampu...</p>
-        </div>
+            <!-- Informasi Wilayah -->
+            <div class="mt-8 p-4 bg-gray-100 shadow-lg rounded-lg border border-gray-200">
+                <h2 class="text-xl font-bold text-green-800 text-center">Informasi Wilayah</h2>
+                <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                    <div class="flex justify-center">
+                        <img src="{{ asset('images/petabbs.png') }}" alt="Peta Wilayah"
+                            class="max-w-[250px] max-h-[250px] w-full h-auto rounded-lg shadow-md object-cover">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div class="bg-white p-3 rounded-lg shadow-md text-center flex flex-col items-center">
+                            <img src="{{ asset('icons/map.png') }}" alt="Luas Wilayah" class="w-8 h-8 mb-1">
+                            <h3 class="text-base font-semibold text-gray-700">Luas Wilayah</h3>
+                            <p class="text-sm text-gray-600">150 km²</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg shadow-md text-center flex flex-col items-center">
+                            <img src="{{ asset('icons/kec.png') }}" alt="Jumlah Kecamatan" class="w-8 h-8 mb-1">
+                            <h3 class="text-base font-semibold text-gray-700">Jumlah Kecamatan</h3>
+                            <p class="text-sm text-gray-600">10 Kecamatan</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg shadow-md text-center flex flex-col items-center">
+                            <img src="{{ asset('icons/residential.png') }}" alt="Jumlah Desa" class="w-8 h-8 mb-1">
+                            <h3 class="text-base font-semibold text-gray-700">Jumlah Desa</h3>
+                            <p class="text-sm text-gray-600">50 Desa</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
 
-    @if (!request()->has('kecamatan') && !request()->has('desa') && !request()->has('tahun'))
-    <!-- Bagian Visi dan Misi Desa -->
-    <div class="mt-12 p-6 bg-white shadow-lg rounded-lg border border-gray-200">
-        <h2 class="text-2xl font-bold text-green-800 text-center">Visi dan Misi Kabupaten</h2>
-        <div class="mt-6 flex flex-col md:flex-row items-center gap-6">
-            <div class="w-full md:w-1/2">
-                <img src="{{ asset('images/kantorbbs.jpg') }}" alt="Visi dan Misi" class="w-full rounded-lg shadow-md">
-            </div>
-            <div class="w-full md:w-1/2 space-y-4">
-                <div class="bg-gradient-to-r from-green-100 to-green-300 p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold text-green-900">Visi</h3>
-                    <p class="text-gray-800 mt-2 italic">
-                        "Mewujudkan desa yang maju, mandiri, dan sejahtera berbasis kearifan lokal serta partisipasi
-                        masyarakat."
-                    </p>
-                </div>
-                <div class="bg-gradient-to-r from-gray-100 to-gray-300 p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold text-green-900">Misi</h3>
-                    <ul class="list-disc list-inside text-gray-800 mt-2 space-y-1">
-                        <li>Meningkatkan kesejahteraan masyarakat melalui pembangunan ekonomi.</li>
-                        <li>Memperkuat nilai budaya dan kearifan lokal.</li>
-                        <li>Meningkatkan kualitas pendidikan dan kesehatan.</li>
-                        <li>Membangun infrastruktur desa yang berkelanjutan.</li>
-                        <li>Meningkatkan partisipasi aktif masyarakat dalam pembangunan desa.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script>
+        function openModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('hidden'); // Menghapus 'hidden' untuk menampilkan modal
+            modal.classList.add('flex'); // Menambahkan 'flex' untuk memposisikan modal di tengah
+        }
 
-    <!-- Informasi Wilayah -->
-    <div class="mt-8 p-4 bg-gray-100 shadow-lg rounded-lg border border-gray-200">
-        <h2 class="text-xl font-bold text-green-800 text-center">Informasi Wilayah</h2>
-        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-            <div class="flex justify-center">
-                <img src="{{ asset('images/petabbs.png') }}" alt="Peta Wilayah" class="max-w-[250px] max-h-[250px] w-full h-auto rounded-lg shadow-md object-cover">
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div class="bg-white p-3 rounded-lg shadow-md text-center flex flex-col items-center">
-                    <img src="{{ asset('icons/map.png') }}" alt="Luas Wilayah" class="w-8 h-8 mb-1">
-                    <h3 class="text-base font-semibold text-gray-700">Luas Wilayah</h3>
-                    <p class="text-sm text-gray-600">150 km²</p>
-                </div>
-                <div class="bg-white p-3 rounded-lg shadow-md text-center flex flex-col items-center">
-                    <img src="{{ asset('icons/kec.png') }}" alt="Jumlah Kecamatan" class="w-8 h-8 mb-1">
-                    <h3 class="text-base font-semibold text-gray-700">Jumlah Kecamatan</h3>
-                    <p class="text-sm text-gray-600">10 Kecamatan</p>
-                </div>
-                <div class="bg-white p-3 rounded-lg shadow-md text-center flex flex-col items-center">
-                    <img src="{{ asset('icons/residential.png') }}" alt="Jumlah Desa" class="w-8 h-8 mb-1">
-                    <h3 class="text-base font-semibold text-gray-700">Jumlah Desa</h3>
-                    <p class="text-sm text-gray-600">50 Desa</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endif
-</div>
-
-<script>
-    function openModal() {
-        const modal = document.getElementById('modal');
-        modal.classList.remove('hidden'); // Menghapus 'hidden' untuk menampilkan modal
-        modal.classList.add('flex'); // Menambahkan 'flex' untuk memposisikan modal di tengah
-    }
-
-    function closeModal() {
-        const modal = document.getElementById('modal');
-        modal.classList.remove('flex'); // Menghapus 'flex'
-        modal.classList.add('hidden'); // Menambahkan 'hidden' untuk menyembunyikan modal
-    }
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('flex'); // Menghapus 'flex'
+            modal.classList.add('hidden'); // Menambahkan 'hidden' untuk menyembunyikan modal
+        }
 
 
 
-    document.addEventListener("DOMContentLoaded", function() {
-        const scrollContainer = document.getElementById("scrollContainer");
 
-        scrollContainer.addEventListener("wheel", function(event) {
-            event.preventDefault();
-            scrollContainer.scrollLeft += event.deltaY;
-        });
-    });
+        document.addEventListener("DOMContentLoaded", function() {
+            const scrollContainer = document.getElementById("scrollContainer");
 
-    document.addEventListener("DOMContentLoaded", function() {
-        const buttons = document.querySelectorAll(".nav-button");
-        const sections = document.querySelectorAll(".content-section");
-
-        buttons.forEach(button => {
-            button.addEventListener("click", function() {
-                const target = this.getAttribute("data-target");
-
-                sections.forEach(section => {
-                    section.classList.add("hidden");
-                });
-
-                document.getElementById(target).classList.remove("hidden");
+            scrollContainer.addEventListener("wheel", function(event) {
+                event.preventDefault();
+                scrollContainer.scrollLeft += event.deltaY;
             });
         });
 
-        // Tampilkan konten desa jika ada parameter di URL
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('kecamatan') || urlParams.has('desa') || urlParams.has('tahun')) {
-            document.getElementById('desa-content').classList.remove('hidden');
-        }
-    });
+        document.addEventListener("DOMContentLoaded", function() {
+            const buttons = document.querySelectorAll(".nav-button");
+            const sections = document.querySelectorAll(".content-section");
 
-    document.getElementById("filterForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Mencegah form mengirim request ke server langsung
+            buttons.forEach(button => {
+                button.addEventListener("click", function() {
+                    const target = this.getAttribute("data-target");
 
-        // Ambil nilai dari dropdown
-        const kecamatan = document.getElementById("kecamatan").value;
-        const desa = document.getElementById("desa").value;
-        const tahun = document.getElementById("tahun").value;
+                    sections.forEach(section => {
+                        section.classList.add("hidden");
+                    });
 
-        // Bangun query parameter
-        let params = new URLSearchParams();
-        if (kecamatan) params.append("kecamatan", kecamatan);
-        if (desa) params.append("desa", desa);
-        if (tahun) params.append("tahun", tahun);
+                    document.getElementById(target).classList.remove("hidden");
+                });
+            });
 
-        // Redirect ke URL dengan query parameter tanpa berpindah route
-        window.location.href = "/profil-desa?" + params.toString();
-    });
-</script>
+            // Tampilkan konten desa jika ada parameter di URL
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('kecamatan') || urlParams.has('desa')) {
+                document.getElementById('desa-content').classList.remove('hidden');
+            }
+        });
+
+        document.getElementById("filterForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Mencegah form mengirim request ke server langsung
+
+            // Ambil nilai dari dropdown
+            const kecamatan = document.getElementById("kecamatan").value;
+            const desa = document.getElementById("desa").value;
+
+            // Bangun query parameter
+            let params = new URLSearchParams();
+            if (kecamatan) params.append("kecamatan", kecamatan);
+            if (desa) params.append("desa", desa);
+
+            // Redirect ke URL dengan query parameter tanpa berpindah route
+            window.location.href = "/profil-desa?" + params.toString();
+        });
+    </script>
 @endsection
