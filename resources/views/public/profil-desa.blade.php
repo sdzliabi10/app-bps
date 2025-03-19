@@ -36,18 +36,6 @@
                 </select>
             </div>
 
-            <div class="w-full md:w-auto">
-                <label for="tahun" class="block text-gray-700 font-semibold">Tahun</label>
-                <select id="tahun" name="tahun" class="w-full md:w-32 p-2 border rounded-md">
-                    <option value="">Pilih Tahun</option>
-                    @for ($i = date('Y'); $i >= 2024; $i--)
-                        <option value="{{ $i }}" {{ request('tahun') == $i ? 'selected' : '' }}>
-                            {{ $i }}</option>
-                    @endfor
-                </select>
-            </div>
-
-
             <button type="submit"
                 class="w-full md:w-auto bg-green-600 text-white px-6 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-300">
                 Tampilkan Data
@@ -55,7 +43,7 @@
         </form>
 
         <!-- Navbar dan Konten Desa (Awalnya Disembunyikan) -->
-        <div id="desa-content" class="{{ request('kecamatan') || request('desa') || request('tahun') ? '' : 'hidden' }}">
+        <div id="desa-content" class="{{ request('kecamatan') || request('desa') }}">
             <!-- Navbar -->
             <nav class="mt-6 bg-white shadow-md rounded-lg p-4 border border-gray-200">
                 <ul class="flex flex-wrap justify-center gap-4 border-b">
@@ -130,13 +118,14 @@
                         <div class="mb-4">
                             <h3 class="text-xl font-semibold text-gray-700">Kontak</h3>
                             <p class="text-gray-600"><strong>Alamat:</strong> {{ $profilDesa->alamat }}</p>
-                            <p class="text-gray-600"><strong>Telepon:</strong> {{ $profilDesa->telepon }}</p>
+                            <p class="text-gray-600"><strong>Telepon:</strong> {{ $profilDesa->kontak }}</p>
                         </div>
                     @endforeach
 
                 </div>
             </div>
 
+            {{-- PERANGKAT DESA --}}
             <div id="perangkat-desa" class="content-section hidden mt-6">
                 <h1 class="text-3xl font-bold text-gray-800 mb-4">Perangkat Desa</h1>
 
@@ -151,8 +140,9 @@
                                         <span class="text-gray-500">Foto</span>
                                     </div>
                                     <div class="p-4 text-center space-y-1">
-                                        <h3 class="text-lg font-bold text-gray-400 leading-tight">Nama</h3>
-                                        <p class="text-gray-400 text-sm leading-tight">Jabatan</p>
+                                        <h3 class="text-lg font-bold text-gray-400 leading-tight">nama
+                                        </h3>
+                                        <p class="text-gray-400 text-sm leading-tight">jabatan</p>
                                     </div>
                                 </div>
                                 <p class="text-gray-500 mt-4 text-center w-full">Belum ada data perangkat desa. Silakan
@@ -260,6 +250,7 @@
                 </div>
             </div>
 
+            {{-- BPD --}}
             <div id="bpd" class="content-section hidden mt-6">
                 <h1 class="text-3xl font-bold text-gray-800 mb-4">Badan Permusyawaratan Desa (BPD)</h1>
 
@@ -301,6 +292,7 @@
                 </div>
             </div>
 
+            {{-- Kelembagaan Desa --}}
             <div id="kelembagaan" class="content-section hidden">
                 <h1 class="text-3xl font-bold text-gray-800 mb-6">Kelembagaan Desa</h1>
 
@@ -423,9 +415,9 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
+            {{-- INFRASTRUKTUR --}}
             <div id="infrastruktur" class="content-section hidden">
                 <h1 class="text-3xl font-bold text-gray-800">Infrastruktur</h1>
                 <p class="mt-4 text-gray-600">Informasi mengenai infrastruktur desa...</p>
@@ -442,7 +434,7 @@
             </div>
         </div>
 
-        @if (!request()->has('kecamatan') && !request()->has('desa') && !request()->has('tahun'))
+        @if (!request()->has('kecamatan') && !request()->has('desa'))
             <!-- Bagian Visi dan Misi Desa -->
             <div class="mt-12 p-6 bg-white shadow-lg rounded-lg border border-gray-200">
                 <h2 class="text-2xl font-bold text-green-800 text-center">Visi dan Misi Kabupaten</h2>
@@ -546,7 +538,7 @@
 
             // Tampilkan konten desa jika ada parameter di URL
             const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('kecamatan') || urlParams.has('desa') || urlParams.has('tahun')) {
+            if (urlParams.has('kecamatan') || urlParams.has('desa')) {
                 document.getElementById('desa-content').classList.remove('hidden');
             }
         });
@@ -557,13 +549,11 @@
             // Ambil nilai dari dropdown
             const kecamatan = document.getElementById("kecamatan").value;
             const desa = document.getElementById("desa").value;
-            const tahun = document.getElementById("tahun").value;
 
             // Bangun query parameter
             let params = new URLSearchParams();
             if (kecamatan) params.append("kecamatan", kecamatan);
             if (desa) params.append("desa", desa);
-            if (tahun) params.append("tahun", tahun);
 
             // Redirect ke URL dengan query parameter tanpa berpindah route
             window.location.href = "/profil-desa?" + params.toString();

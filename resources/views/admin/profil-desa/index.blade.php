@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label for="kecamatan" class="form-label">Kecamatan</label>
-                            <select class="form-select" id="kecamatan" name="kecamatan">
+                            <select class="form-select" id="kecamatan" name="kecamatan" onchange="filterDesa()">
                                 <option value="">Pilih Kecamatan</option>
                                 @foreach ($kecamatanList as $kecamatan)
                                     <option value="{{ $kecamatan->kdkec }}" {{ request('kecamatan') == $kecamatan->kdkec ? 'selected' : '' }}>
@@ -46,7 +46,7 @@
                             <select class="form-select" id="desa" name="desa">
                                 <option value="">Pilih Desa</option>
                                 @foreach ($desaList as $desa)
-                                    <option value="{{ $desa->iddesa }}" {{ request('desa') == $desa->iddesa ? 'selected' : '' }}>
+                                    <option value="{{ $desa->iddesa }}" data-kecamatan="{{ $desa->kdkec }}" style="display: none;" {{ request('desa') == $desa->iddesa ? 'selected' : '' }}>
                                         {{ $desa->nmdesa }}
                                     </option>
                                 @endforeach
@@ -74,7 +74,7 @@
         <div class="card mb-4">
             <div class="card-header">
                 Informasi Kecamatan dan Desa
-                <a href="{{ route('profil-desa.create') }}" class="btn btn-primary btn-sm float-end">Tambah Desa</a>
+                <a href="{{ route('profil-desa.create') }}" class="btn btn-primary btn-sm float-end">Tambah Data</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

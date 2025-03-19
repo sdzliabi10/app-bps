@@ -19,8 +19,8 @@
                 </a>
                 <div class="collapse" id="collapsePages" data-bs-parent="#accordionSidenav">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
-                        <a class="nav-link" href="/admin-profil">Profil Desa</a>
-                        <a class="nav-link" href="account-billing.html">Perangkat Desa</a>
+                        <a class="nav-link" href="/admin/profil-desa">Profil Desa</a>
+                        <a class="nav-link" href="/admin/perangkat-desa">Perangkat Desa</a>
                         <a class="nav-link" href="account-profile.html">Keuangan</a>
                         <a class="nav-link" href="account-billing.html">BPD</a>
                         <a class="nav-link" href="account-profile.html">Kelembagaan</a>
