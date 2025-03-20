@@ -79,7 +79,10 @@
                 class="content-section flex flex-col md:flex-row items-center bg-white shadow-md rounded-lg p-6 border border-gray-200 mt-6">
                 <!-- Gambar Desa -->
                 <div class="md:w-1/3 w-full">
-                    <img src="{{ asset('images/desa.jpg') }}" alt="Profil Desa" class="w-full h-auto rounded-lg shadow-md">
+                    @foreach ($profilDesas as $profilDesa)
+                        <img src="{{ asset('storage/' . $profilDesa->foto) }}" alt="Profil Desa"
+                            class="w-full h-auto rounded-lg shadow-md">
+                    @endforeach
                 </div>
 
                 <!-- Informasi Profil Desa -->
@@ -151,7 +154,7 @@
                                 @foreach ($perangkat as $p)
                                     <div class="min-w-[250px] md:w-full bg-white shadow-md rounded-xl overflow-hidden p-4">
                                         <div class="bg-gray-100 rounded-lg overflow-hidden">
-                                            <img src="{{ asset('images/' . $p['foto']) }}" alt="{{ $p['nama'] }}"
+                                            <img src="{{ asset('storage/' . $p['foto']) }}" alt="{{ $p['nama'] }}"
                                                 class="w-full h-56 object-cover">
                                         </div>
                                         <div class="p-4 text-center space-y-1">

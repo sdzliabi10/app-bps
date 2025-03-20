@@ -14,7 +14,7 @@ class ProfilDesa extends Model
 
     // Kolom yang dapat diisi (mass assignable)
     protected $fillable = [
-        'kddesa', 'visi', 'misi', 'program_unggulan', 'batas_wilayah', 'alamat', 'kontak',
+        'kddesa', 'visi', 'misi', 'program_unggulan', 'batas_wilayah', 'alamat', 'kontak', 'foto'
     ];
 
     // Relasi ke tabel Desa
