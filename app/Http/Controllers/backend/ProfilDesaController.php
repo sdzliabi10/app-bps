@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\ProfilDesa;
 use App\Models\Kecamatan;  // Menambahkan model Kecamatan
 use App\Models\Desa;      // Menambahkan model Desa
+use Illuminate\Support\Facades\Storage;
+
 
 class ProfilDesaController extends Controller
 {
@@ -29,9 +31,6 @@ class ProfilDesaController extends Controller
             })
             ->when($request->desa, function ($query) use ($request) {
                 return $query->where('kddesa', $request->desa);
-            })
-            ->when($request->tahun, function ($query) use ($request) {
-                return $query->whereYear('created_at', $request->tahun);
             })
             ->get();
 
@@ -59,7 +58,15 @@ class ProfilDesaController extends Controller
             'batas_wilayah' => 'required',
             'alamat' => 'required',
             'kontak' => 'required',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adding validation for photo upload
         ]);
+
+        // Handling the file upload
+        if ($request->hasFile('foto')) {
+            $fotoPath = $request->file('foto')->store('profil-desa', 'public'); // Store photo in 'profil-desa' folder under public disk
+        } else {
+            $fotoPath = null; // If no photo is uploaded, set to null (you can choose to make it optional)
+        }
 
         ProfilDesa::create([
             'kddesa' => $request->kddesa,
@@ -69,10 +76,12 @@ class ProfilDesaController extends Controller
             'batas_wilayah' => $request->batas_wilayah,
             'alamat' => $request->alamat,
             'kontak' => $request->kontak,
+            'foto' => $fotoPath,  // Storing the file path in the database
         ]);
 
         return redirect()->route('profil-desa.index');
     }
+
 
 
     // Menampilkan form untuk mengedit profil desa
@@ -92,16 +101,31 @@ class ProfilDesaController extends Controller
             'batas_wilayah' => 'required',
             'alamat' => 'required',
             'kontak' => 'required',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $profilDesa->update($request->all());
+        $data = $request->all();
+
+        if ($request->hasFile('foto')) {
+            $data['foto'] = $request->file('foto')->store('profil-desa', 'public');
+        }
+
+        $profilDesa->update($data);
         return redirect()->route('profil-desa.index');
     }
-
+    
     // Menghapus profil desa
     public function destroy(ProfilDesa $profilDesa)
     {
+        // Check if the file exists and delete it from storage
+        if ($profilDesa->foto && Storage::disk('public')->exists($profilDesa->foto)) {
+            Storage::disk('public')->delete($profilDesa->foto);
+        }
+
+        // Delete the ProfilDesa record
         $profilDesa->delete();
+
+        // Redirect back to the index page
         return redirect()->route('profil-desa.index');
     }
 }

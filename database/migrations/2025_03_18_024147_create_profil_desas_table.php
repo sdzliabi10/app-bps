@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('batas_wilayah');
             $table->string('alamat');
             $table->string('kontak');
+            $table->string('foto')->nullable();
             $table->timestamps();
         
             // Foreign key harus mengarah ke 'iddesa' di 'desa'

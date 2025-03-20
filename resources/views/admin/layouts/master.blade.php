@@ -59,11 +59,15 @@
                 }
             } else {
                 desaDropdown.disabled = false;
+                var selectedDesa = "{{ request('desa') }}"; // Ambil desa yang sudah difilter
                 for (var i = 0; i < options.length; i++) {
                     var kecamatanAttr = options[i].getAttribute("data-kecamatan");
 
                     if (kecamatanAttr === selectedKecamatan) {
                         options[i].style.display = "";
+                        if (options[i].value === selectedDesa) {
+                            options[i].selected = true; // Tetap memilih desa yang sudah dipilih sebelumnya
+                        }
                     } else {
                         options[i].style.display = "none";
                     }
@@ -75,6 +79,7 @@
             filterDesa();
         });
     </script>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>

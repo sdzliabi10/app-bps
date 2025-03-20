@@ -8,7 +8,7 @@
             <div class="card mb-4">
                 <div class="card-header">Tambah Profil Desa</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('profil-desa.store') }}">
+                    <form method="POST" action="{{ route('profil-desa.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="kecamatan" class="form-label">Kecamatan</label>
@@ -35,6 +35,10 @@
                             </select>
                         </div>
 
+                        <div class="mb-3">
+                            <label for="foto" class="form-label">Foto</label>
+                            <input type="file" class="form-control" name="foto" id="foto" required>
+                        </div>
                         <div class="mb-3">
                             <label for="visi_misi" class="form-label">Visi</label>
                             <textarea class="form-control" name="visi" id="visi_misi" required>{{ old('visi') }}</textarea>

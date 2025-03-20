@@ -33,26 +33,53 @@
             </select>
         </div>
 
-        <button type="submit" class="w-full md:w-auto bg-green-600 text-white px-6 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-300">
-            Tampilkan Data
-        </button>
-    </form>
+            <button type="submit"
+                class="w-full md:w-auto bg-green-600 text-white px-6 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-300">
+                Tampilkan Data
+            </button>
+        </form>
 
-    @if (!request()->has('kecamatan') && !request()->has('desa'))
-    <!-- Bagian Visi dan Misi Desa -->
-    <div class="mt-12 p-6 bg-white shadow-lg rounded-lg border border-gray-200">
-        <h2 class="text-2xl font-bold text-green-800 text-center">Visi dan Misi Kabupaten</h2>
-        <div class="mt-6 flex flex-col md:flex-row items-center gap-6">
-            <div class="w-full md:w-1/2">
-                <img src="{{ asset('images/kantorbbs.jpg') }}" alt="Visi dan Misi" class="w-full rounded-lg shadow-md">
-            </div>
-            <div class="w-full md:w-1/2 space-y-4">
-                <div class="bg-gradient-to-r from-green-100 to-green-300 p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold text-green-900">Visi</h3>
-                    <p class="text-gray-800 mt-2 italic">
-                        "Mewujudkan desa yang maju, mandiri, dan sejahtera berbasis kearifan lokal serta partisipasi
-                        masyarakat."
-                    </p>
+        <!-- Navbar dan Konten Desa (Awalnya Disembunyikan) -->
+        <div id="desa-content" class="{{ request('kecamatan') || request('desa') }}">
+            <!-- Navbar -->
+            <nav class="mt-6 bg-white shadow-md rounded-lg p-4 border border-gray-200">
+                <ul class="flex flex-wrap justify-center gap-4 border-b">
+                    <li><button
+                            class="nav-button cursor-pointer px-4 py-2 text-gray-700 font-semibold relative transition duration-300 border-b-2 border-transparent hover:text-blue-700 hover:border-orange-500"
+                            data-target="profil-desa">Profil Desa</button></li>
+                    <li><button
+                            class="nav-button cursor-pointer px-4 py-2 text-gray-700 font-semibold relative transition duration-300 border-b-2 border-transparent hover:text-blue-700 hover:border-orange-500"
+                            data-target="perangkat-desa">Perangkat Desa</button></li>
+                    <li><button
+                            class="nav-button cursor-pointer px-4 py-2 text-gray-700 font-semibold relative transition duration-300 border-b-2 border-transparent hover:text-blue-700 hover:border-orange-500"
+                            data-target="keuangan">Keuangan</button></li>
+                    <li><button
+                            class="nav-button cursor-pointer px-4 py-2 text-gray-700 font-semibold relative transition duration-300 border-b-2 border-transparent hover:text-blue-700 hover:border-orange-500"
+                            data-target="bpd">BPD</button></li>
+                    <li><button
+                            class="nav-button cursor-pointer px-4 py-2 text-gray-700 font-semibold relative transition duration-300 border-b-2 border-transparent hover:text-blue-700 hover:border-orange-500"
+                            data-target="kelembagaan">Kelembagaan</button></li>
+                    <li><button
+                            class="nav-button cursor-pointer px-4 py-2 text-gray-700 font-semibold relative transition duration-300 border-b-2 border-transparent hover:text-blue-700 hover:border-orange-500"
+                            data-target="infrastruktur">Infrastruktur</button></li>
+                    <li><button
+                            class="nav-button cursor-pointer px-4 py-2 text-gray-700 font-semibold relative transition duration-300 border-b-2 border-transparent hover:text-blue-700 hover:border-orange-500"
+                            data-target="transparansi">Transparansi</button></li>
+                    <li><button
+                            class="nav-button cursor-pointer px-4 py-2 text-gray-700 font-semibold relative transition duration-300 border-b-2 border-transparent hover:text-blue-700 hover:border-orange-500"
+                            data-target="program-tidak-mampu">Program Tidak Mampu</button></li>
+                </ul>
+            </nav>
+
+            <!-- Konten Desa -->
+            <div id="profil-desa"
+                class="content-section flex flex-col md:flex-row items-center bg-white shadow-md rounded-lg p-6 border border-gray-200 mt-6">
+                <!-- Gambar Desa -->
+                <div class="md:w-1/3 w-full">
+                    @foreach ($profilDesas as $profilDesa)
+                        <img src="{{ asset('storage/' . $profilDesa->foto) }}" alt="Profil Desa"
+                            class="w-full h-auto rounded-lg shadow-md">
+                    @endforeach
                 </div>
                 <div class="bg-gradient-to-r from-gray-100 to-gray-300 p-6 rounded-lg shadow-md">
                     <h3 class="text-xl font-semibold text-green-900">Misi</h3>
@@ -162,25 +189,44 @@
             </div>
         </div>
 
-        {{-- PERANGKAT DESA --}}
-        <div id="perangkat-desa" class="content-section hidden mt-6">
-            <h1 class="text-3xl font-bold text-gray-800 mb-4">Perangkat Desa</h1>
 
-            <div class="relative bg-gray-100 p-6 rounded-lg shadow-md">
-                <!-- Wrapper untuk Scroll Horizontal di Mobile -->
-                <div class="overflow-x-auto scroll-smooth scrollbar-hide p-2">
-                    <div class="flex space-x-4 md:grid md:grid-cols-3 lg:grid-cols-4 md:gap-6">
-                        @if (empty($perangkat))
-                        <!-- Template Kosong dengan Style Tetap -->
-                        <div class="min-w-[250px] md:w-full bg-white shadow-md rounded-xl overflow-hidden p-4">
-                            <div class="bg-gray-200 rounded-lg flex items-center justify-center h-56">
-                                <span class="text-gray-500">Foto</span>
-                            </div>
-                            <div class="p-4 text-center space-y-1">
-                                <h3 class="text-lg font-bold text-gray-400 leading-tight">nama
-                                </h3>
-                                <p class="text-gray-400 text-sm leading-tight">jabatan</p>
-                            </div>
+            {{-- PERANGKAT DESA --}}
+            <div id="perangkat-desa" class="content-section hidden mt-6">
+                <h1 class="text-3xl font-bold text-gray-800 mb-4">Perangkat Desa</h1>
+
+                <div class="relative bg-gray-100 p-6 rounded-lg shadow-md">
+                    <!-- Wrapper untuk Scroll Horizontal di Mobile -->
+                    <div class="overflow-x-auto scroll-smooth scrollbar-hide p-2">
+                        <div class="flex space-x-4 md:grid md:grid-cols-3 lg:grid-cols-4 md:gap-6">
+                            @if (empty($perangkat))
+                                <!-- Template Kosong dengan Style Tetap -->
+                                <div class="min-w-[250px] md:w-full bg-white shadow-md rounded-xl overflow-hidden p-4">
+                                    <div class="bg-gray-200 rounded-lg flex items-center justify-center h-56">
+                                        <span class="text-gray-500">Foto</span>
+                                    </div>
+                                    <div class="p-4 text-center space-y-1">
+                                        <h3 class="text-lg font-bold text-gray-400 leading-tight">nama
+                                        </h3>
+                                        <p class="text-gray-400 text-sm leading-tight">jabatan</p>
+                                    </div>
+                                </div>
+                                <p class="text-gray-500 mt-4 text-center w-full">Belum ada data perangkat desa. Silakan
+                                    tambahkan melalui panel admin.</p>
+                            @else
+                                @foreach ($perangkat as $p)
+                                    <div class="min-w-[250px] md:w-full bg-white shadow-md rounded-xl overflow-hidden p-4">
+                                        <div class="bg-gray-100 rounded-lg overflow-hidden">
+                                            <img src="{{ asset('storage/' . $p['foto']) }}" alt="{{ $p['nama'] }}"
+                                                class="w-full h-56 object-cover">
+                                        </div>
+                                        <div class="p-4 text-center space-y-1">
+                                            <h3 class="text-lg font-bold text-gray-800 leading-tight">{{ $p['nama'] }}
+                                            </h3>
+                                            <p class="text-gray-600 text-sm leading-tight">{{ $p['jabatan'] }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                         <p class="text-gray-500 mt-4 text-center w-full">Belum ada data perangkat desa. Silakan
                             tambahkan melalui panel admin.</p>

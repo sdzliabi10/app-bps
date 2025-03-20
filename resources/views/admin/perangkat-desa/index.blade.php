@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Dashboard')
+@section('title', 'Perangkat Desa')
 
 @section('content')
     <main>
@@ -10,10 +10,10 @@
                     <div class="row align-items-center justify-content-between">
                         <div class="col-auto mt-4">
                             <h1 class="page-header-title">
-                                <div class="page-header-icon"><i data-feather="filter"></i></div>
-                                Kecamatan dan Desa
+                                <div class="page-header-icon"><i data-feather="users"></i></div>
+                                Perangkat Desa
                             </h1>
-                            <div class="page-header-subtitle">Tabel data Kecamatan dan Desa beserta informasi terkait</div>
+                            <div class="page-header-subtitle">Tabel data Perangkat Desa beserta informasi terkait</div>
                         </div>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                     Filter Data
                 </div>
                 <div class="card-body">
-                    <form method="GET" action="{{ route('profil-desa.index') }}">
+                    <form id="filterform" method="GET" action="{{ route('perangkat-desa.index') }}">
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="kecamatan" class="form-label">Kecamatan</label>
@@ -75,49 +75,37 @@
             <!-- Data Table -->
             <div class="card mb-4">
                 <div class="card-header">
-                    Informasi Kecamatan dan Desa
-                    <a href="{{ route('profil-desa.create') }}" class="btn btn-primary btn-sm float-end">Tambah Data</a>
+                    Informasi Perangkat Desa
+                    <a href="{{ route('perangkat-desa.create') }}" class="btn btn-primary btn-sm float-end">Tambah Data</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="datatablesSimple" class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Kecamatan</th>
-                                    <th>Desa</th>
+                                    <th>Nama</th>
+                                    <th>Jabatan</th>
                                     <th>Foto</th>
-                                    {{-- <th>Tahun</th> --}}
-                                    <th>Visi</th>
-                                    <th>Misi</th>
-                                    <th>Program Unggulan</th>
-                                    <th>Batas Wilayah</th>
-                                    <th>Alamat</th>
-                                    <th>Telepon</th>
+                                    <th>Desa</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($profilDesas as $profilDesa)
+                                @foreach ($perangkatDesas as $perangkatDesa)
                                     <tr>
-                                        <td>{{ $profilDesa->desa->kecamatan->nmkec }}</td>
-                                        <td>{{ $profilDesa->desa->nmdesa }}</td>
-                                        {{-- <td>{{ $profilDesa->created_at->year }}</td> --}}
+                                        <td>{{ $perangkatDesa->nama }}</td>
+                                        <td>{{ $perangkatDesa->jabatan }}</td>
                                         <td>
-                                            <img src="{{ asset('storage/' . $profilDesa->foto) }}" alt="Foto"
+                                            <img src="{{ asset('storage/' . $perangkatDesa->foto) }}" alt="Foto"
                                                 class="img-thumbnail" width="50">
                                         </td>
-                                        <td>{{ Str::limit($profilDesa->visi, 50) }}</td>
-                                        <td>{{ Str::limit($profilDesa->misi, 50) }}</td>
-                                        <td>{{ Str::limit($profilDesa->program_unggulan, 50) }}</td>
-                                        <td>{{ Str::limit($profilDesa->batas_wilayah, 50) }}</td>
-                                        <td>{{ Str::limit($profilDesa->alamat, 50) }}</td>
-                                        <td>{{ Str::limit($profilDesa->kontak, 50) }}</td>
+                                        <td>{{ $perangkatDesa->desa->nmdesa }}</td>
                                         <td>
-                                            <a href="{{ route('profil-desa.edit', $profilDesa->id) }}"
+                                            <a href="{{ route('perangkat-desa.edit', $perangkatDesa->id) }}"
                                                 class="btn btn-warning btn-sm">
                                                 <i class="fas fa-edit"></i> Edit
                                             </a>
-                                            <form action="{{ route('profil-desa.destroy', $profilDesa->id) }}"
+                                            <form action="{{ route('perangkat-desa.destroy', $perangkatDesa->id) }}"
                                                 method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
@@ -144,6 +132,4 @@
             new simpleDatatables.DataTable("#datatablesSimple");
         });
     </script>
-
-
 @endsection
