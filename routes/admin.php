@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Backend\ProfilDesaController;
 use App\Http\Controllers\Backend\PerangkatDesaController;
+use App\Http\Controllers\Backend\KeuanganController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/test', function () {
@@ -16,6 +17,8 @@ Route::get('/', function () {
 
 Route::resource('profil-desa', ProfilDesaController::class);
 Route::resource('perangkat-desa', PerangkatDesaController::class);
+Route::resource('keuangan', KeuanganController::class);
+
 // Route::resource('perangkat-desa', ProfilDesaController::class);
 
 // Route::get('/admin-profil', function () {

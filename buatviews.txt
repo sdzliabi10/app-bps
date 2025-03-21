@@ -1,0 +1,277 @@
+Saya sedang membuat system informasi desa. Memiliki fitur Profil desa yang berisi informasi profil desa, perangkat desa, keuangan, BPD, Kelembagaan, Infrastruktur, Transparansi, Program tidak mampu.Saya sedang berada pada keuangan. 
+berikut ini adalah migrations pendapatan dan pembelanjaan pada keuangan. 
+
+Pembelanjaan
+<?php
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('pembelanjaans', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('iddesa'); // Menambahkan kolom iddesa
+            $table->string('jenis_pengeluaran');  // Jenis pengeluaran (misalnya gaji, infrastruktur)
+            $table->decimal('jumlah', 15, 2);     // Jumlah pengeluaran
+            $table->timestamps();                 // Kolom created_at dan updated_at
+
+            // Menambahkan foreign key constraint untuk iddesa
+            $table->foreign('iddesa')->references('iddesa')->on('desa')->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('pembelanjaans');
+    }
+};
+
+Pendapatan
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up()
+    {
+        Schema::create('pendapatans', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('iddesa'); // Menambahkan kolom iddesa
+            $table->string('sumber_pendapatan');  // Nama sumber pendapatan (misalnya pajak, hibah)
+            $table->decimal('jumlah', 15, 2);     // Jumlah pendapatan
+            $table->timestamps();                 // Kolom created_at dan updated_at
+    
+            // Menambahkan foreign key constraint untuk iddesa
+            $table->foreign('iddesa')->references('iddesa')->on('desa')->onDelete('cascade');
+        });
+    }
+    
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('pendapatans');
+    }
+};
+
+tolong buatkan views admin.backend.keuangan.index sesuai dengan tampilan views index perangkat desa berikut :
+@extends('admin.layouts.master')
+
+@section('title', 'Perangkat Desa')
+
+@section('content')
+    <main>
+        <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+            <div class="container-xl px-4">
+                <div class="page-header-content pt-4">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-auto mt-4">
+                            <h1 class="page-header-title">
+                                <div class="page-header-icon"><i data-feather="users"></i></div>
+                                Perangkat Desa
+                            </h1>
+                            <div class="page-header-subtitle">Tabel data Perangkat Desa beserta informasi terkait</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container-xl px-4 mt-n10">
+            <!-- Filter Form -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    Filter Data
+                </div>
+                <div class="card-body">
+                    <form id="filterform" method="GET" action="{{ route('perangkat-desa.index') }}">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="kecamatan" class="form-label">Kecamatan</label>
+                                <select class="form-select" id="kecamatan" name="kecamatan" onchange="filterDesa()">
+                                    <option value="">Pilih Kecamatan</option>
+                                    @foreach ($kecamatanList as $kecamatan)
+                                        <option value="{{ $kecamatan->kdkec }}"
+                                            {{ request('kecamatan') == $kecamatan->kdkec ? 'selected' : '' }}>
+                                            {{ $kecamatan->nmkec }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="desa" class="form-label">Desa</label>
+                                <select class="form-select" id="desa" name="desa">
+                                    <option value="">Pilih Desa</option>
+                                    @foreach ($desaList as $desa)
+                                        <option value="{{ $desa->iddesa }}" data-kecamatan="{{ $desa->kdkec }}"
+                                            style="display: none;" {{ request('desa') == $desa->iddesa ? 'selected' : '' }}>
+                                            {{ $desa->nmdesa }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            {{-- <div class="col-md-4">
+                            <label for="tahun" class="form-label">Tahun</label>
+                            <select class="form-select" id="tahun" name="tahun">
+                                <option value="">Pilih Tahun</option>
+                                @for ($i = date('Y'); $i >= 2024; $i--)
+                                    <option value="{{ $i }}" {{ request('tahun') == $i ? 'selected' : '' }}>
+                                        {{ $i }}
+                                    </option>
+                                @endfor
+                            </select>
+                        </div> --}}
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Tampilkan Data</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    Informasi Perangkat Desa
+                    <a href="{{ route('perangkat-desa.create') }}" class="btn btn-primary btn-sm float-end">Tambah Data</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="datatablesSimple" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Jabatan</th>
+                                    <th>Foto</th>
+                                    <th>Desa</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($perangkatDesas as $perangkatDesa)
+                                    <tr>
+                                        <td>{{ $perangkatDesa->nama }}</td>
+                                        <td>{{ $perangkatDesa->jabatan }}</td>
+                                        <td>
+                                            <img src="{{ asset('storage/' . $perangkatDesa->foto) }}" alt="Foto"
+                                                class="img-thumbnail" width="50">
+                                        </td>
+                                        <td>{{ $perangkatDesa->desa->nmdesa }}</td>
+                                        <td>
+                                            <a href="{{ route('perangkat-desa.edit', $perangkatDesa->id) }}"
+                                                class="btn btn-warning btn-sm">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
+                                            <form action="{{ route('perangkat-desa.destroy', $perangkatDesa->id) }}"
+                                                method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-trash"></i> Hapus
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+@endsection
+
+@section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            new simpleDatatables.DataTable("#datatablesSimple");
+        });
+    </script>
+@endsection
+
+Buatkan juga admin.keuangan.create sesuai dengan tampilan views create perangkat desa berikut
+@extends('admin.layouts.master')
+
+@section('title', 'Tambah Perangkat Desa')
+
+@section('content')
+    <main>
+        <div class="container-xl px-4 mt-4">
+            <div class="card mb-4">
+                <div class="card-header">Tambah Perangkat Desa</div>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('perangkat-desa.store') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="kecamatan" class="form-label">Kecamatan</label>
+                            <select class="form-control" name="kecamatan" id="kecamatan" onchange="filterDesa()" required>
+                                <option value="">Pilih Kecamatan</option>
+                                @foreach ($kecamatanList as $kecamatan)
+                                    <option value="{{ $kecamatan->kdkec }}"
+                                        {{ old('kecamatan') == $kecamatan->kdkec ? 'selected' : '' }}>
+                                        {{ $kecamatan->nmkec }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="desa" class="form-label">Desa</label>
+                            <select class="form-control" name="iddesa" id="desa" required>
+                                <option value="">Pilih Desa</option>
+                                @foreach ($desaList as $desa)
+                                    <option value="{{ $desa->iddesa }}" data-kecamatan="{{ $desa->kdkec }}"
+                                        style="display: none;">
+                                        {{ $desa->nmdesa }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="foto" class="form-label">Foto</label>
+                            <input type="file" class="form-control" name="foto" id="foto" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Nama</label>
+                            <input type="text" class="form-control" name="nama" id="nama"
+                                value="{{ old('nama') }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="jabatan" class="form-label">Jabatan</label>
+                            <input type="text" class="form-control" name="jabatan" id="jabatan"
+                                value="{{ old('jabatan') }}" required>
+                        </div>                        
+
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>    
+@endsection
+
+ 
+
+Kode harus efisien, terstruktur dengan baik, dan optimal. Pastikan untuk mengikuti best practice dan standar industri saat menerapkan algoritma dan logika yang diperlukan untuk mencapai fungsionalitas yang diinginkan. pastikan berfungsi sebagaimana mestinya dan memenuhi semua persyaratan. 
