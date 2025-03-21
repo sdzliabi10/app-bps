@@ -29,8 +29,7 @@
 
     <div class="container mx-auto mt-6 p-4">
         @yield('content')
-    </div>
-
+    </div>    
 </body>
 <script>
     function filterDesa() {
