@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\PerangkatDesa;
+use App\Models\bpd;
 use App\Models\Desa;
 use App\Models\Kecamatan;
 use Illuminate\Support\Facades\Storage;
 
-
-class PerangkatDesaController extends Controller
+class BpdController extends Controller
 {
     public function index(Request $request)
     {
@@ -21,7 +19,7 @@ class PerangkatDesaController extends Controller
         })->get();
 
         // Mengambil data perangkat desa berdasarkan filter desa
-        $perangkatDesas = PerangkatDesa::with('desa')
+        $bpds = Bpd::with('desa')
             ->when($request->kecamatan, function ($query) use ($request) {
                 // Mengambil perangkat desa yang hanya berada di kecamatan yang dipilih
                 return $query->whereHas('desa', function ($query) use ($request) {
@@ -34,14 +32,14 @@ class PerangkatDesaController extends Controller
             ->get();
 
 
-        return view('admin.perangkat-desa.index', compact('perangkatDesas', 'desaList', 'kecamatanList'));
+        return view('admin.bpd.index', compact('bpds', 'desaList', 'kecamatanList'));
     }
 
     public function create()
     {
         $kecamatanList = Kecamatan::all();
         $desaList = Desa::all();
-        return view('admin.perangkat-desa.create', compact('desaList', 'kecamatanList'));
+        return view('admin.bpd.create', compact('desaList', 'kecamatanList'));
     }
 
     public function store(Request $request)
@@ -53,25 +51,25 @@ class PerangkatDesaController extends Controller
             'iddesa' => 'required',
         ]);
 
-        $fotoPath = $request->file('foto')->store('perangkat-desa', 'public');
+        $fotoPath = $request->file('foto')->store('bpd', 'public');
 
-        PerangkatDesa::create([
+        Bpd::create([
             'nama' => $request->nama,
             'jabatan' => $request->jabatan,
             'foto' => $fotoPath,
             'iddesa' => $request->iddesa,
         ]);
 
-        return redirect()->route('perangkat-desa.index');
+        return redirect()->route('bpd.index');
     }
 
-    public function edit(PerangkatDesa $perangkatDesa)
+    public function edit(Bpd $bpd)
     {
         $desaList = Desa::all();
-        return view('admin.perangkat-desa.edit', compact('perangkatDesa', 'desaList'));
+        return view('admin.bpd.edit', compact('bpd', 'desaList'));
     }
 
-    public function update(Request $request, PerangkatDesa $perangkatDesa)
+    public function update(Request $request, Bpd $bpd)
     {
         $request->validate([
             'nama' => 'required',
@@ -83,21 +81,21 @@ class PerangkatDesaController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')->store('perangkat-desa', 'public');
+            $data['foto'] = $request->file('foto')->store('bpd', 'public');
         }
 
-        $perangkatDesa->update($data);
-        return redirect()->route('perangkat-desa.index');
+        $bpd->update($data);
+        return redirect()->route('bpd.index');
     }
 
-    public function destroy(PerangkatDesa $perangkatDesa)
+    public function destroy(Bpd $bpd)
     {
-        if ($perangkatDesa->foto && Storage::disk('public')->exists($perangkatDesa->foto)) {
-            Storage::disk('public')->delete($perangkatDesa->foto);
+        if ($bpd->foto && Storage::disk('public')->exists($bpd->foto)) {
+            Storage::disk('public')->delete($bpd->foto);
         }
 
-        $perangkatDesa->delete();
+        $bpd->delete();
 
-        return redirect()->route('perangkat-desa.index');
+        return redirect()->route('bpd.index');
     }
 }
