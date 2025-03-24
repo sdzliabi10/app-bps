@@ -190,12 +190,12 @@
                         @foreach ($perangkat as $p)
                         <div class="min-w-[250px] md:w-full bg-white shadow-md rounded-xl overflow-hidden p-4">
                             <div class="bg-gray-100 rounded-lg overflow-hidden">
-                                <img src="{{ asset('storage/' . $p['foto']) }}" alt="{{ $p['nama'] }}" class="w-full h-56 object-cover">
+                                <img src="{{ asset('storage/' . $p->foto) }}" alt="{{ $p->foto }}" class="w-full h-56 object-cover">
                             </div>
                             <div class="p-4 text-center space-y-1">
-                                <h3 class="text-lg font-bold text-gray-800 leading-tight">{{ $p['nama'] }}
+                                <h3 class="text-lg font-bold text-gray-800 leading-tight">{{ $p->nama }}
                                 </h3>
-                                <p class="text-gray-600 text-sm leading-tight">{{ $p['jabatan'] }}</p>
+                                <p class="text-gray-600 text-sm leading-tight">{{ $p->jabatan}}</p>
                             </div>
                         </div>
                         @endforeach
@@ -214,7 +214,7 @@
                     <div class="bg-green-50 p-4 rounded-lg">
                         <h3 class="text-lg font-semibold text-green-800">Pendapatan</h3>
                         <p class="text-2xl font-bold text-green-800 mt-2">
-                            Rp {{ number_format(array_sum(array_column($keuangan, 'pendapatan')), 0, ',', '.') }}
+                            Rp {{ number_format(array_sum(array_column($pendapatan->toArray(), 'jumlah')), 0, ',', '.') }}
                         </p>
                         <p class="text-sm text-gray-600">Total pendapatan desa.</p>
                     </div>
@@ -222,7 +222,7 @@
                     <div class="bg-blue-50 p-4 rounded-lg">
                         <h3 class="text-lg font-semibold text-blue-800">Belanja</h3>
                         <p class="text-2xl font-bold text-blue-800 mt-2">
-                            Rp {{ number_format(array_sum(array_column($keuangan, 'belanja')), 0, ',', '.') }}
+                            Rp {{ number_format(array_sum(array_column($pembelanjaan->toArray(), 'jumlah')), 0, ',', '.') }}
                         </p>
                         <p class="text-sm text-gray-600">Total belanja desa.</p>
                     </div>
@@ -241,11 +241,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($keuangan as $item)
+                            @forelse ($pendapatan as $item)
                             <tr>
                                 <td class="py-2 px-4 border-b">{{ $item['sumber_pendapatan'] ?? 'N/A' }}</td>
                                 <td class="py-2 px-4 border-b">
-                                    {{ number_format($item['pendapatan'] ?? 0, 0, ',', '.') }}
+                                    {{ number_format($item['jumlah'] ?? 0, 0, ',', '.') }}
                                 </td>
                             </tr>
                             @empty
@@ -271,11 +271,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($keuangan as $item)
+                            @forelse ($pembelanjaan as $item)
                             <tr>
-                                <td class="py-2 px-4 border-b">{{ $item['jenis_belanja'] ?? 'N/A' }}</td>
+                                <td class="py-2 px-4 border-b">{{ $item['jenis_pengeluaran'] ?? 'N/A' }}</td>
                                 <td class="py-2 px-4 border-b">
-                                    {{ number_format($item['belanja'] ?? 0, 0, ',', '.') }}
+                                    {{ number_format($item['jumlah'] ?? 0, 0, ',', '.') }}
                                 </td>
                             </tr>
                             @empty

@@ -22,6 +22,10 @@ class Desa extends Model
     {
         return $this->hasMany(ProfilDesa::class, 'iddesa');
     }
+    
+    public function perangkatDesa(){        
+        return $this->hasMany(PerangkatDesa::class, 'iddesa');
+    }
 
     // Relasi ke tabel Struktur Perangkat Desa
 //     public function perangkat()

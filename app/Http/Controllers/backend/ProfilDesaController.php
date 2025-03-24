@@ -82,12 +82,17 @@ class ProfilDesaController extends Controller
         return redirect()->route('profil-desa.index');
     }
 
-
-
+    
     // Menampilkan form untuk mengedit profil desa
     public function edit(ProfilDesa $profilDesa)
     {
-        return view('admin.profil-desa.edit', compact('profilDesa'));
+        // Get all kecamatan and desa data
+        $kecamatanList = Kecamatan::all();
+        $desaList = Desa::when($profilDesa->kecamatan, function ($query) use ($profilDesa) {
+            return $query->where('kdkec', $profilDesa->kecamatan);
+        })->get();
+
+        return view('admin.profil-desa.edit', compact('profilDesa', 'kecamatanList', 'desaList'));
     }
 
     // Memperbarui profil desa
@@ -101,19 +106,29 @@ class ProfilDesaController extends Controller
             'batas_wilayah' => 'required',
             'alamat' => 'required',
             'kontak' => 'required',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        // Prepare data for update
         $data = $request->all();
 
+        // Check if a new photo is uploaded
         if ($request->hasFile('foto')) {
+            // Delete the old photo if exists
+            if ($profilDesa->foto && Storage::disk('public')->exists($profilDesa->foto)) {
+                Storage::disk('public')->delete($profilDesa->foto);
+            }
+            // Store the new photo
             $data['foto'] = $request->file('foto')->store('profil-desa', 'public');
         }
 
+        // Update the ProfilDesa record
         $profilDesa->update($data);
+
         return redirect()->route('profil-desa.index');
     }
-    
+
+
     // Menghapus profil desa
     public function destroy(ProfilDesa $profilDesa)
     {
