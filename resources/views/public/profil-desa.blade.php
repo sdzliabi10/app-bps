@@ -337,41 +337,26 @@
             <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
                 <h2 class="text-2xl font-semibold text-gray-700 mb-4">LPMD/LPMK</h2>
                 <div class="overflow-x-auto">
+                    @if(isset($lpmd) && count($lpmd) > 0)
                     <table class="min-w-full bg-white">
                         <thead>
                             <tr>
-                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
-                                    Data</th>
-                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
-                                    Jumlah</th>
+                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">Data</th>
+                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">Jumlah</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($lpmd as $item)
                             <tr>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">Jumlah Pengurus
-                                </td>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">6</td>
-                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">{{ $item['data'] }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">{{ $item['jumlah'] }}</td>
                             </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">Jumlah Anggota
-                                </td>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">20</td>
-                                <td class="py-2 px-4 border-b border-gray-200"></td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">Jumlah Kegiatan
-                                </td>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">0</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">Jumlah Dana (Ribu
-                                    Rupiah)</td>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">0</td>
-                            </tr>
-                            <!-- Tambahkan baris lainnya sesuai kebutuhan -->
+                            @endforeach
                         </tbody>
                     </table>
+                    @else
+                    <p class="text-gray-600">Data LPMD/LPMK tidak tersedia.</p>
+                    @endif
                 </div>
             </div>
 
@@ -379,46 +364,26 @@
             <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
                 <h2 class="text-2xl font-semibold text-gray-700 mb-4">TP PKK Desa</h2>
                 <div class="overflow-x-auto">
+                    @if(isset($pkk) && count($pkk) > 0)
                     <table class="min-w-full bg-white">
                         <thead>
                             <tr>
-                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
-                                    Data</th>
-                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
-                                    Jumlah</th>
+                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">Data</th>
+                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">Jumlah</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($pkk as $item)
                             <tr>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">Jumlah Pengurus
-                                </td>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">20</td>
-                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">{{ $item['data'] }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">{{ $item['jumlah'] }}</td>
                             </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">Jumlah Anggota
-                                </td>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">60</td>
-                                <td class="py-2 px-4 border-b border-gray-200"></td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">Jumlah Kegiatan
-                                </td>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">29</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">Jumlah Buku
-                                    Administrasi</td>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">50</td>
-                            </tr>
-                            <tr>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">Jumlah Dana (Ribu
-                                    Rupiah)</td>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">25.850.000</td>
-                            </tr>
-                            <!-- Tambahkan baris lainnya sesuai kebutuhan -->
+                            @endforeach
                         </tbody>
                     </table>
+                    @else
+                    <p class="text-gray-600">Data TP PKK Desa tidak tersedia.</p>
+                    @endif
                 </div>
             </div>
 
@@ -426,67 +391,76 @@
             <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
                 <h2 class="text-2xl font-semibold text-gray-700 mb-4">Bumdes (Badan Usaha Milik Desa)</h2>
                 <div class="overflow-x-auto">
+                    @if(isset($bumdes) && count($bumdes) > 0)
                     <table class="min-w-full bg-white">
                         <thead>
                             <tr>
-                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
-                                    Data</th>
-                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
-                                    Jumlah</th>
-                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
-                                    Aksi</th>
+                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">Data</th>
+                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">Jumlah</th>
+                                <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($bumdes as $item)
                             <tr>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">Jumlah Bumdes</td>
-                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">0</td>
+                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">{{ $item['data'] }}</td>
+                                <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">{{ $item['jumlah'] }}</td>
                                 <td class="py-2 px-4 border-b border-gray-200">
-                                    <button onclick="openModal('modal-kelembagaan')" class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition duration-300">Lihat
-                                        Detail</button>
+                                    <button class="open-modal bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition duration-300" data-modal-id="modal-kelembagaan">
+                                        Lihat Detail
+                                    </button>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
+                    @else
+                    <p class="text-gray-600">Data Bumdes tidak tersedia.</p>
+                    @endif
                 </div>
             </div>
 
             <!-- Modal -->
             <div id="modal-kelembagaan" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center p-4 z-50 hidden">
-                <div class="bg-white rounded-lg w-full max-w-md overflow-hidden shadow-xl transform transition-all">
+                <div class="modal-content bg-white rounded-lg w-full max-w-md overflow-hidden shadow-xl transform transition-all">
                     <div class="flex justify-between items-center bg-blue-500 text-white p-4">
                         <h3 class="text-xl font-semibold">Jumlah BumDes</h3>
-                        <button onclick="closeModal('modal-kelembagaan')" class="text-white hover:text-gray-200 text-2xl">&times;</button>
+                        <!-- Tombol untuk menutup modal -->
+                        <button class="close-modal text-white hover:text-gray-200 text-2xl" data-modal-id="modal-kelembagaan">&times;</button>
                     </div>
-                    <div id="modal-content" class="p-6">
-                        <!-- Tabel untuk Nama dan Deskripsi -->
+                    <div class="p-6">
+                        <!-- Konten modal -->
+                        @if(isset($bumdesDetail) && count($bumdesDetail) > 0)
                         <table class="min-w-full bg-white">
                             <thead>
                                 <tr>
-                                    <th class="py-2 px-4 border border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
-                                        Nama</th>
-                                    <th class="py-2 px-4 border border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
-                                        Deskripsi</th>
+                                    <th class="py-2 px-4 border border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">Nama</th>
+                                    <th class="py-2 px-4 border border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">Deskripsi</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($bumdesDetail as $item)
                                 <tr>
-                                    <td class="py-2 px-4 border border-gray-200 text-sm text-gray-700">ARGO INTEN</td>
-                                    <td class="py-2 px-4 border border-gray-200 text-sm text-gray-700">BERGERAK
-                                        DIBIDANG WISATA MAKANAN LOKAL JASA NOMOR ; AHU-04143.AH 01.33 TH 2022</td>
+                                    <td class="py-2 px-4 border border-gray-200 text-sm text-gray-700">{{ $item['nama'] }}</td>
+                                    <td class="py-2 px-4 border border-gray-200 text-sm text-gray-700">{{ $item['deskripsi'] }}</td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
+                        @else
+                        <p class="text-gray-600">Detail Bumdes tidak tersedia.</p>
+                        @endif
                     </div>
                     <div class="bg-gray-50 px-6 py-4 flex justify-end">
-                        <button onclick="closeModal('modal-kelembagaan')" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-300">Tutup</button>
+                        <!-- Tombol untuk menutup modal -->
+                        <button class="close-modal bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-300" data-modal-id="modal-kelembagaan">Tutup</button>
                     </div>
                 </div>
             </div>
         </div>
 
         {{-- INFRASTRUKTUR --}}
-        <div id="infrastruktur" class="content-section hidden">
+        <div id="infrastruktur" class="content-section hidden mt-6">
             <h1 class="text-3xl font-bold text-gray-800">Infrastruktur</h1>
             <p class="mt-4 text-gray-600">Informasi mengenai infrastruktur desa...</p>
 
@@ -500,258 +474,288 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($infrastruktur as $item)
                     <tr>
-                        <td class="border border-gray-300 p-2">Jumlah Jembatan</td>
-                        <td class="border border-gray-300 p-2">12</td>
+                        <td class="border border-gray-300 p-2">{{ $item['kategori'] }}</td>
                         <td class="border border-gray-300 p-2">
-                            <button onclick="openModal('modal-infrastruktur', 'Total jembatan di desa ini adalah 12 unit.')" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat
-                                Detail</button>
+                            {{ empty($item['nilai']) ? 'Tidak ada data' : $item['nilai'] }}
+                        </td>
+                        <td class="border border-gray-300 p-2">
+                            <button data-modal-id="modal-detail-{{ $item['id'] }}" class="open-modal bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat Detail</button>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="border border-gray-300 p-2">Tempat Pembuangan Sampah</td>
-                        <td class="border border-gray-300 p-2">-</td>
-                        <td class="border border-gray-300 p-2">
-                            <button onclick="openModal('modal-infrastruktur', 'Informasi detail tentang tempat pembuangan sampah belum tersedia.')" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat
-                                Detail</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-300 p-2">Jumlah Pasar</td>
-                        <td class="border border-gray-300 p-2">0</td>
-                        <td class="border border-gray-300 p-2">
-                            <button onclick="openModal('modal-infrastruktur')" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat
-                                Detail</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-300 p-2">Jumlah Jalan Desa</td>
-                        <td class="border border-gray-300 p-2">26</td>
-                        <td class="border border-gray-300 p-2">
-                            <button onclick="openModal('modal-infrastruktur')" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat
-                                Detail</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-300 p-2">Jumlah Jalan Kabupaten</td>
-                        <td class="border border-gray-300 p-2">1</td>
-                        <td class="border border-gray-300 p-2">
-                            <button onclick="openModal('modal-infrastruktur')" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat
-                                Detail</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-300 p-2">Jumlah Irigasi</td>
-                        <td class="border border-gray-300 p-2">22</td>
-                        <td class="border border-gray-300 p-2">
-                            <button onclick="openModal('modal-infrastruktur')" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat
-                                Detail</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-300 p-2">Jumlah Pusat Perdagangan</td>
-                        <td class="border border-gray-300 p-2">0</td>
-                        <td class="border border-gray-300 p-2">
-                            <button onclick="openModal('modal-infrastruktur')" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat
-                                Detail</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border border-gray-300 p-2">Jumlah Rumah Potong Hewan</td>
-                        <td class="border border-gray-300 p-2">0</td>
-                        <td class="border border-gray-300 p-2">
-                            <button onclick="openModal('modal-infrastruktur')" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Lihat
-                                Detail</button>
-                        </td>
-                    </tr>
-                    <!-- Tambahkan baris lainnya sesuai kebutuhan -->
+                    @endforeach
                 </tbody>
             </table>
 
-            <!-- Modal -->
-            <div id="modal-infrastruktur" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center p-4 z-50 hidden">
-                <div class="bg-white rounded-lg w-full max-w-md overflow-hidden shadow-xl transform transition-all">
+            {{-- Modal untuk Lihat Detail --}}
+            @foreach($infrastruktur as $item)
+            <div id="modal-detail-{{ $item['id'] }}" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center p-4 z-50 hidden">
+                <div class="modal-content bg-white rounded-lg w-full max-w-2xl overflow-hidden shadow-xl transform transition-all">
                     <div class="flex justify-between items-center bg-blue-500 text-white p-4">
-                        <h3 class="text-xl font-semibold">Detail Data</h3>
-                        <button onclick="closeModal('modal-infrastruktur')" class="text-white hover:text-gray-200 text-2xl">&times;</button>
+                        <h3 class="text-lg font-semibold">Detail {{ $item['kategori'] }}</h3>
+                        <button data-modal-id="modal-detail-{{ $item['id'] }}" class="close-modal text-white hover:text-gray-200 text-2xl">&times;</button>
                     </div>
-                    <div id="modal-content" class="p-6">
-                        <!-- Konten modal -->
+                    <div class="p-6">
+                        <table class="w-full border-collapse border border-gray-300">
+                            <thead>
+                                <tr class="bg-gray-200">
+                                    @foreach($item['columns'] as $column)
+                                    <th class="border border-gray-300 p-2 text-left">{{ $column }}</th>
+                                    @endforeach
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($item['data'] as $data)
+                                <tr>
+                                    @foreach($data as $value)
+                                    <td class="border border-gray-300 p-2">
+                                        {{ $value ?? 'tidak ada data' }}
+                                    </td>
+                                    @endforeach
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                     <div class="bg-gray-50 px-6 py-4 flex justify-end">
-                        <button onclick="closeModal('modal-infrastruktur')" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Tutup</button>
+                        <button data-modal-id="modal-detail-{{ $item['id'] }}" class="close-modal bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Tutup</button>
                     </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+
+
+        {{-- transparansi --}}
+        <div id="transparansi" class="content-section hidden p-6 bg-white rounded-lg shadow-md mt-6">
+            Tabel Peraturan Desa
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold mb-4">Jumlah Peraturan Desa: {{ count($peraturanDesas) }}</h2>
+                <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Judul Peraturan Desa</th>
+                            <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Nomor Peraturan Desa</th>
+                            <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Tanggal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($peraturanDesas as $peraturan)
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="py-3 px-4 border-2 border-gray-200">{{ $peraturan->judul }}</td>
+                            <td class="py-3 px-4 border-2 border-gray-200">{{ $peraturan->nomor }}</td>
+                            <td class="py-3 px-4 border-2 border-gray-200">{{ $peraturan->tanggal->format('d/m/Y') }}</td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="3" class="py-3 px-4 border-2 border-gray-200 text-center">Tidak ada data</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tabel Edaran Kepala Desa -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold mb-4">Jumlah Edaran Kepala Desa: {{ count($edaranKepalaDesas) }}</h2>
+                <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Judul Edaran</th>
+                            <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Nomor Edaran</th>
+                            <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Tanggal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($edaranKepalaDesas as $edaran)
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="py-3 px-4 border-2 border-gray-200">{{ $edaran->judul }}</td>
+                            <td class="py-3 px-4 border-2 border-gray-200">{{ $edaran->nomor }}</td>
+                            <td class="py-3 px-4 border-2 border-gray-200">{{ $edaran->tanggal->format('d/m/Y') }}</td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="3" class="py-3 px-4 border-2 border-gray-200 text-center">Tidak ada data</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tabel Program yang Diterima -->
+            <div>
+                <h2 class="text-xl font-semibold mb-4">
+                    Jumlah Program yang Diterima: {{ count($programPusat) + count($programProvinsi) + count($programKabupaten) }}
+                </h2>
+
+                <!-- Program Pusat -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-2">Pemerintah Pusat: {{ $programPusat->count() }}</h3>
+                    <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Nama Program</th>
+                                <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Anggaran (Ribu Rupiah)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($programPusat as $program)
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="py-3 px-4 border-2 border-gray-200">{{ $program->nama }}</td>
+                                <td class="py-3 px-4 border-2 border-gray-200">{{ number_format($program->anggaran, 0, ',', '.') }}</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="2" class="py-3 px-4 border-2 border-gray-200 text-center">Tidak ada data</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Program Provinsi -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-2">Pemerintah Provinsi: {{ $programProvinsi->count() }}</h3>
+                    <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Nama Program</th>
+                                <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Anggaran (Ribu Rupiah)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($programProvinsi as $program)
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="py-3 px-4 border-2 border-gray-200">{{ $program->nama }}</td>
+                                <td class="py-3 px-4 border-2 border-gray-200">{{ number_format($program->anggaran, 0, ',', '.') }}</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="2" class="py-3 px-4 border-2 border-gray-200 text-center">Tidak ada data</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Program Kabupaten -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">Pemerintah Kabupaten: {{ $programKabupaten->count() }}</h3>
+                    <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Nama Program</th>
+                                <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Anggaran (Ribu Rupiah)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($programKabupaten as $program)
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="py-3 px-4 border-2 border-gray-200">{{ $program->nama }}</td>
+                                <td class="py-3 px-4 border-2 border-gray-200">{{ number_format($program->anggaran, 0, ',', '.') }}</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="2" class="py-3 px-4 border-2 border-gray-200 text-center">Tidak ada data</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
-
-    {{-- transparansi --}}
-    <div id="transparansi" class="content-section p-6 bg-white rounded-lg shadow-md mt-6">
-        <!-- Tabel Peraturan Desa -->
-        <div class="mb-8">
-            <h2 class="text-xl font-semibold mb-4">Jumlah Peraturan Desa: {{ count($peraturanDesas) }}</h2>
-            <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
-                <thead class="bg-gray-100">
-                    <tr>
-                        <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Judul Peraturan Desa</th>
-                        <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Nomor Peraturan Desa</th>
-                        <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Tanggal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($peraturanDesas as $peraturan)
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="py-3 px-4 border-2 border-gray-200">{{ $peraturan->judul }}</td>
-                        <td class="py-3 px-4 border-2 border-gray-200">{{ $peraturan->nomor }}</td>
-                        <td class="py-3 px-4 border-2 border-gray-200">{{ $peraturan->tanggal->format('d/m/Y') }}</td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="3" class="py-3 px-4 border-2 border-gray-200 text-center">Tidak ada data</td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Tabel Edaran Kepala Desa -->
-        <div class="mb-8">
-            <h2 class="text-xl font-semibold mb-4">Jumlah Edaran Kepala Desa: {{ count($edaranKepalaDesas) }}</h2>
-            <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
-                <thead class="bg-gray-100">
-                    <tr>
-                        <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Judul Edaran</th>
-                        <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Nomor Edaran</th>
-                        <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Tanggal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($edaranKepalaDesas as $edaran)
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="py-3 px-4 border-2 border-gray-200">{{ $edaran->judul }}</td>
-                        <td class="py-3 px-4 border-2 border-gray-200">{{ $edaran->nomor }}</td>
-                        <td class="py-3 px-4 border-2 border-gray-200">{{ $edaran->tanggal->format('d/m/Y') }}</td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="3" class="py-3 px-4 border-2 border-gray-200 text-center">Tidak ada data</td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Tabel Program yang Diterima -->
-        <div>
-            <h2 class="text-xl font-semibold mb-4">
-            Jumlah Program yang Diterima: {{ count($programPusat) + count($programProvinsi) + count($programKabupaten) }}
-            </h2>
-
-            <!-- Program Pusat -->
-            <div class="mb-6">
-                <h3 class="text-lg font-semibold mb-2">Pemerintah Pusat: {{ $programPusat->count() }}</h3>
-                <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
-                    <thead class="bg-gray-100">
-                        <tr>
-                            <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Nama Program</th>
-                            <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Anggaran (Ribu Rupiah)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($programPusat as $program)
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="py-3 px-4 border-2 border-gray-200">{{ $program->nama }}</td>
-                            <td class="py-3 px-4 border-2 border-gray-200">{{ number_format($program->anggaran, 0, ',', '.') }}</td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="2" class="py-3 px-4 border-2 border-gray-200 text-center">Tidak ada data</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Program Provinsi -->
-            <div class="mb-6">
-                <h3 class="text-lg font-semibold mb-2">Pemerintah Provinsi: {{ $programProvinsi->count() }}</h3>
-                <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
-                    <thead class="bg-gray-100">
-                        <tr>
-                            <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Nama Program</th>
-                            <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Anggaran (Ribu Rupiah)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($programProvinsi as $program)
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="py-3 px-4 border-2 border-gray-200">{{ $program->nama }}</td>
-                            <td class="py-3 px-4 border-2 border-gray-200">{{ number_format($program->anggaran, 0, ',', '.') }}</td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="2" class="py-3 px-4 border-2 border-gray-200 text-center">Tidak ada data</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Program Kabupaten -->
-            <div>
-                <h3 class="text-lg font-semibold mb-2">Pemerintah Kabupaten: {{ $programKabupaten->count() }}</h3>
-                <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
-                    <thead class="bg-gray-100">
-                        <tr>
-                            <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Nama Program</th>
-                            <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Anggaran (Ribu Rupiah)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($programKabupaten as $program)
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="py-3 px-4 border-2 border-gray-200">{{ $program->nama }}</td>
-                            <td class="py-3 px-4 border-2 border-gray-200">{{ number_format($program->anggaran, 0, ',', '.') }}</td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="2" class="py-3 px-4 border-2 border-gray-200 text-center">Tidak ada data</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
+    {{-- kemiskinan --}}
     <div id="program-tidak-mampu" class="content-section hidden">
-        <h1 class="text-3xl font-bold text-gray-800">Program Tidak Mampu</h1>
         <p class="mt-4 text-gray-600">Informasi mengenai program untuk warga tidak mampu...</p>
+
+        <div class="mt-6 bg-gray-50 p-4 rounded-lg shadow-sm">
+            <p class="text-lg text-gray-700">
+                <span class="font-semibold">Jumlah Keluarga Penerima Program Penanggulangan Kemiskinan:</span>
+                <span class="font-bold text-blue-600">{{ $totalPenerima }} keluarga</span>
+            </p>
+        </div>
+
+        <div class="mt-6">
+            <h2 class="text-2xl font-semibold text-gray-700">Detail Program Bantuan</h2>
+            <table class="min-w-full mt-4 bg-white border border-gray-300">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="py-3 px-4 border border-gray-300 text-left text-gray-700">Nama Program</th>
+                        <th class="py-3 px-4 border border-gray-300 text-left text-gray-700">Jumlah Keluarga Penerima</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(count($programs) > 0)
+                    <!-- Tampilkan data dari array jika ada -->
+                    @foreach($programs as $program)
+                    <tr>
+                        <td class="py-3 px-4 border border-gray-300">{{ $program['nama_program'] }}</td>
+                        <td class="py-3 px-4 border border-gray-300">{{ $program['jumlah_keluarga'] }}</td>
+                    </tr>
+                    @endforeach
+                    @else
+                    <!-- Tampilkan pesan jika tidak ada data -->
+                    <tr>
+                        <td colspan="2" class="py-3 px-4 border border-gray-300 text-center text-gray-500">
+                            Tidak ada data program bantuan.
+                        </td>
+                    </tr>
+                    @endif
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </div>
 
 <script>
-    function openModal(modalId, title, content) {
-        const modal = document.getElementById(modalId);
-        const modalContent = modal.querySelector('#modal-content');
+    // Fungsi untuk membuka modal
+    document.querySelectorAll('.open-modal').forEach(button => {
+        button.addEventListener('click', () => {
+            const modalId = button.getAttribute('data-modal-id');
+            const modal = document.getElementById(modalId);
 
-        // Set judul dan konten modal
-        // modal.querySelector('h3').textContent = title;
-        // modalContent.innerHTML = <p class="text-gray-700">${content}</p>;
+            // Tampilkan modal
+            modal.classList.remove('hidden');
 
-        // Tampilkan modal
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-    }
+            // Atur posisi modal di tengah layar
+            const modalContent = modal.querySelector('.modal-content');
+            modalContent.style.position = 'fixed';
+            modalContent.style.top = '50%';
+            modalContent.style.left = '50%';
+            modalContent.style.transform = 'translate(-50%, -50%)';
+        });
+    });
 
-    function closeModal(modalId) {
-        const modal = document.getElementById(modalId);
-        modal.classList.remove('flex');
-        modal.classList.add('hidden');
-    }
+    // Fungsi untuk menutup modal
+    document.querySelectorAll('.close-modal').forEach(button => {
+        button.addEventListener('click', () => {
+            const modalId = button.getAttribute('data-modal-id');
+            document.getElementById(modalId).classList.add('hidden');
+        });
+    });
+    // function openModal(modalId, title, content) {
+    //     const modal = document.getElementById(modalId);
+    //     const modalContent = modal.querySelector('#modal-content');
+
+    //     // Set judul dan konten modal
+    //     // modal.querySelector('h3').textContent = title;
+    //     // modalContent.innerHTML = <p class="text-gray-700">${content}</p>;
+
+    //     // Tampilkan modal
+    //     modal.classList.remove('hidden');
+    //     modal.classList.add('flex');
+    // }
+
+    // function closeModal(modalId) {
+    //     const modal = document.getElementById(modalId);
+    //     modal.classList.remove('flex');
+    //     modal.classList.add('hidden');
+    // }
 
 
     document.addEventListener("DOMContentLoaded", function() {
