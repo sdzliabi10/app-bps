@@ -137,7 +137,8 @@ class ProfilDesaController extends Controller
         $bpd = collect();
         $lpmdk = collect();
         $pkkDesa = collect();
-        $bumdesCollection = collect();
+        $bumdes = collect();
+        $bumdesDetail = collect();
 
 
         if ($request->has('desa')) {
@@ -148,30 +149,37 @@ class ProfilDesaController extends Controller
             $bpd = Bpd::where('iddesa', $request->desa)->get();
             $lpmdk = Lpmdk::where('iddesa', $request->desa)->get();
             $pkkDesa = PkkDesa::where('iddesa', $request->desa)->get();
-            $bumdesCollection = Bumdes::where('iddesa', $request->desa)->get();
+            $bumdes = Bumdes::where('iddesa', $request->desa)->get();
             
-            $lpmd = [
+            $lpmdk = [
                 ['data' => 'Jumlah Pengurus', 'jumlah' => $lpmdk->sum('jumlah_pengurus')],
                 ['data' => 'Jumlah Kegiatan', 'jumlah' => $lpmdk->sum('jumlah_kegiatan')],
                 ['data' => 'Jumlah Dana', 'jumlah' => $lpmdk->sum('jumlah_dana')]
             ];
     
-            $pkk = [
+            $pkkDesa = [
                 ['data' => 'Jumlah Pengurus', 'jumlah' => $pkkDesa->sum('jumlah_pengurus')],
                 ['data' => 'Jumlah Anggota', 'jumlah' => $pkkDesa->sum('jumlah_anggota')],
                 ['data' => 'Jumlah Buku Administrasi', 'jumlah' => $pkkDesa->sum('jumlah_buku_administrasi')],
                 ['data' => 'Jumlah Dana', 'jumlah' => $pkkDesa->sum('jumlah_dana')]
             ];
     
-            $bumdes = [
-                ['data' => 'Jumlah BUMDES', 'jumlah' => $bumdesCollection->count()]
+            // First get the BUMDES summary
+            $bumdesSummary = [
+                ['data' => 'Jumlah BUMDES', 'jumlah' => $bumdes->count()]
             ];
 
-            // Data detail Bumdes untuk modal
-            $bumdesDetail = $bumdesCollection->map(fn($item) => [
-                'nama' => $item->nama,
-                'deskripsi' => $item->deskripsi
-            ]);
+            // Now get the BUMDES details before overwriting $bumdes
+            $bumdesDetail = $bumdes->map(function($item) {
+                return [
+                    'nama' => $item->nama,
+                    'deskripsi' => $item->deskripsi
+                ];
+            });
+
+            // Finally assign the summary to $bumdes
+            $bumdes = $bumdesSummary;
+
             // Ambil data transparansi berdasarkan desa yang dipilih
             // $peraturanDesas = PeraturanDesa::where('kddesa', $request->desa)->get();
             // $edaranKepalaDesas = EdaranKepalaDesa::where('kddesa', $request->desa)->get();
@@ -189,8 +197,8 @@ class ProfilDesaController extends Controller
             'pendapatan',
             'pembelanjaan',
             'bpd',
-            'lpmd',
-            'pkk',
+            'lpmdk',
+            'pkkDesa',
             'bumdes',
             'bumdesDetail',
             'peraturanDesas',
@@ -204,6 +212,3 @@ class ProfilDesaController extends Controller
         ));
     }
 }
-
-
-
