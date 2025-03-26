@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\public;
+namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,9 +10,10 @@ use App\Models\ProfilDesa;
 use App\Models\PerangkatDesa;
 use App\Models\Pendapatan;
 use App\Models\Pembelanjaan;
-use App\Models\PeraturanDesa;
-use App\Models\EdaranKepalaDesa;
-use App\Models\Program;
+use App\Models\Bpd;
+use App\Models\Lpmdk;
+use App\Models\PkkDesa;
+use App\Models\Bumdes;
 
 class ProfilDesaController extends Controller
 {
@@ -21,8 +22,7 @@ class ProfilDesaController extends Controller
     {
         $kecamatanList = Kecamatan::all();
         $desaList = Desa::all();
-        // $perangkat = PerangkatDesa::all();
-        $bpd = [];
+        // $perangkat = PerangkatDesa::all();        
         // Inisialisasi koleksi kosong untuk data transparansi
         $peraturanDesas = collect(); // Menggunakan koleksi Laravel
         $edaranKepalaDesas = collect(); // Menggunakan koleksi Laravel
@@ -134,13 +134,44 @@ class ProfilDesaController extends Controller
         $keuangan = collect();
         $pendapatan = collect();
         $pembelanjaan = collect();
+        $bpd = collect();
+        $lpmdk = collect();
+        $pkkDesa = collect();
+        $bumdesCollection = collect();
+
 
         if ($request->has('desa')) {
             $profilDesas = ProfilDesa::where('kddesa', $request->desa)->get();
             $perangkat = PerangkatDesa::where('iddesa', $request->desa)->get();
             $pendapatan = Pendapatan::where('iddesa', $request->desa)->get();
             $pembelanjaan = Pembelanjaan::where('iddesa', $request->desa)->get();
+            $bpd = Bpd::where('iddesa', $request->desa)->get();
+            $lpmdk = Lpmdk::where('iddesa', $request->desa)->get();
+            $pkkDesa = PkkDesa::where('iddesa', $request->desa)->get();
+            $bumdesCollection = Bumdes::where('iddesa', $request->desa)->get();
+            
+            $lpmd = [
+                ['data' => 'Jumlah Pengurus', 'jumlah' => $lpmdk->sum('jumlah_pengurus')],
+                ['data' => 'Jumlah Kegiatan', 'jumlah' => $lpmdk->sum('jumlah_kegiatan')],
+                ['data' => 'Jumlah Dana', 'jumlah' => $lpmdk->sum('jumlah_dana')]
+            ];
+    
+            $pkk = [
+                ['data' => 'Jumlah Pengurus', 'jumlah' => $pkkDesa->sum('jumlah_pengurus')],
+                ['data' => 'Jumlah Anggota', 'jumlah' => $pkkDesa->sum('jumlah_anggota')],
+                ['data' => 'Jumlah Buku Administrasi', 'jumlah' => $pkkDesa->sum('jumlah_buku_administrasi')],
+                ['data' => 'Jumlah Dana', 'jumlah' => $pkkDesa->sum('jumlah_dana')]
+            ];
+    
+            $bumdes = [
+                ['data' => 'Jumlah BUMDES', 'jumlah' => $bumdesCollection->count()]
+            ];
 
+            // Data detail Bumdes untuk modal
+            $bumdesDetail = $bumdesCollection->map(fn($item) => [
+                'nama' => $item->nama,
+                'deskripsi' => $item->deskripsi
+            ]);
             // Ambil data transparansi berdasarkan desa yang dipilih
             // $peraturanDesas = PeraturanDesa::where('kddesa', $request->desa)->get();
             // $edaranKepalaDesas = EdaranKepalaDesa::where('kddesa', $request->desa)->get();
@@ -158,6 +189,10 @@ class ProfilDesaController extends Controller
             'pendapatan',
             'pembelanjaan',
             'bpd',
+            'lpmd',
+            'pkk',
+            'bumdes',
+            'bumdesDetail',
             'peraturanDesas',
             'edaranKepalaDesas',
             'programPusat',
@@ -169,3 +204,6 @@ class ProfilDesaController extends Controller
         ));
     }
 }
+
+
+

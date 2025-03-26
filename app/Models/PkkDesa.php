@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Bpd extends Model
+class PkkDesa extends Model
 {
     use HasFactory;
-    protected $fillable = ['nama', 'jabatan', 'foto', 'iddesa'];
-
+    protected $fillable = ['iddesa', 'jumlah_pengurus', 'jumlah_anggota', 'jumlah_kegiatan', 'jumlah_buku_administrasi', 'jumlah_dana'];
     public function desa()
     {
         return $this->belongsTo(Desa::class, 'iddesa');

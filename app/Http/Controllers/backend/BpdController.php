@@ -1,12 +1,12 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use App\Models\bpd;
+use App\Models\Bpd;
 use App\Models\Desa;
 use App\Models\Kecamatan;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Controller;
 
 class BpdController extends Controller
 {

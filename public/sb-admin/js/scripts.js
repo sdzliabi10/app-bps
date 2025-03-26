@@ -3,7 +3,7 @@
     * Copyright 2013-2022 Start Bootstrap
     * Licensed under SEE_LICENSE (https://github.com/StartBootstrap/sb-admin-pro/blob/master/LICENSE)
     */
-    window.addEventListener('DOMContentLoaded', event => {
+window.addEventListener('DOMContentLoaded', event => {
     // Activate feather
     feather.replace();
 
@@ -56,14 +56,19 @@
         });
     }
 
-    // Add active state to sidbar nav links
-    let activatedPath = window.location.pathname.match(/([\w-]+\.html)/, '$1');
+    // Ambil path terakhir dari URL
+    let activatedPath = window.location.pathname.split('/').filter(Boolean).pop();
 
-    if (activatedPath) {
-        activatedPath = activatedPath[0];
-    } else {
-        activatedPath = 'index.html';
+    if (!activatedPath || activatedPath === 'admin') {
+        activatedPath = 'dashboard'; // Halaman default jika tidak ada path
     }
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        if (link.getAttribute('href') && link.getAttribute('href').includes(activatedPath)) {
+            link.classList.add('active');
+        }
+    });
+
 
     const targetAnchors = document.body.querySelectorAll('[href="' + activatedPath + '"].nav-link');
 
