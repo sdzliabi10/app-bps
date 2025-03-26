@@ -15,7 +15,8 @@
 
                         <div class="mb-3">
                             <label for="kecamatan" class="form-label">Kecamatan</label>
-                            <select class="form-control" name="kecamatan" id="kecamatan" onchange="filterDesaEdit()" required>
+                            <select class="form-control" name="kecamatan" id="kecamatan" onchange="filterDesaEdit()"
+                                required>
                                 <option value="">Pilih Kecamatan</option>
                                 @foreach ($kecamatanList as $kecamatan)
                                     <option value="{{ $kecamatan->kdkec }}"
@@ -27,18 +28,17 @@
                         </div>
 
                         <div class="mb-3">
-    <label for="desa" class="form-label">Desa</label>
-    <select class="form-control" name="kddesa" id="desa" required>
-        <option value="">Pilih Desa</option>
-        @foreach ($desaList as $desa)
-            <option value="{{ $desa->iddesa }}"
-                data-kecamatan="{{ $desa->kdkec }}"
-                {{ old('kddesa', $profilDesa->kddesa) == $desa->iddesa ? 'selected' : '' }}>
-                {{ $desa->nmdesa }}
-            </option>
-        @endforeach
-    </select>
-</div>
+                            <label for="desa" class="form-label">Desa</label>
+                            <select class="form-control" name="kddesa" id="desa" required>
+                                <option value="">Pilih Desa</option>
+                                @foreach ($desaList as $desa)
+                                    <option value="{{ $desa->iddesa }}" data-kecamatan="{{ $desa->kdkec }}"
+                                        {{ old('kddesa', $profilDesa->kddesa) == $desa->iddesa ? 'selected' : '' }}>
+                                        {{ $desa->nmdesa }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
 
                         <div class="mb-3">
                             <label for="foto" class="form-label">Foto</label>
@@ -92,7 +92,7 @@
         function filterDesaEdit() {
             var kecamatan = document.getElementById('kecamatan').value;
             var desaOptions = document.querySelectorAll('#desa option');
-    
+
             // Show only the desa that belongs to the selected kecamatan
             desaOptions.forEach(function(option) {
                 if (option.getAttribute('data-kecamatan') === kecamatan || kecamatan === '') {
@@ -101,24 +101,24 @@
                     option.style.display = 'none';
                 }
             });
-    
+
             // Make sure to reset the "selected" property for Desa dropdown on filter
             var desaSelect = document.getElementById('desa');
             if (!Array.from(desaSelect.options).some(option => option.selected)) {
                 desaSelect.selectedIndex = 0; // Default to the first option if nothing is selected
             }
         }
-    
+
         // Trigger the filterDesaEdit function on page load to pre-populate the desa dropdown
         window.onload = function() {
-            filterDesaEdit();  // Make sure the filtering happens when the page loads
+            filterDesaEdit(); // Make sure the filtering happens when the page loads
         };
-    
+
         // Trigger the filterDesaEdit function when the kecamatan dropdown is changed
         document.getElementById('kecamatan').addEventListener('change', function() {
-            filterDesaEdit();  // Reapply the filtering whenever the kecamatan changes
+            filterDesaEdit(); // Reapply the filtering whenever the kecamatan changes
         });
     </script>
-    
+
 
 @endsection

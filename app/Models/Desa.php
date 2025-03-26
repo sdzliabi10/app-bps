@@ -26,6 +26,12 @@ class Desa extends Model
     public function perangkatDesa(){        
         return $this->hasMany(PerangkatDesa::class, 'iddesa');
     }
+    public function lpmdk(){        
+        return $this->hasMany(Lpmdk::class, 'iddesa');
+    }
+    public function pkk_desas(){        
+        return $this->hasMany(PkkDesa::class, 'iddesa');
+    }
 
     // Relasi ke tabel Struktur Perangkat Desa
 //     public function perangkat()
