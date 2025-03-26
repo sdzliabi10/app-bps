@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\public\ProfilDesaController;
+use App\Http\Controllers\DesaDalamAngkaController;
 use App\Models\Desa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +10,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/profil-desa', [ProfilDesaController::class, 'Index'])->name("profil-desa");
 Route::get('/profil-desa', [ProfilDesaController::class, 'showProfilDesa'])->name('profil-desa');
+Route::get('/desa-dalam-angka', [DesaDalamAngkaController::class, 'index'])->name('desa-dalam-angka');
 // Route::get('/pera-desa', [ProfilDesaController::class, 'showProfilDesa'])->name('profil-desa');
 
 

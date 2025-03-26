@@ -17,7 +17,7 @@
             <!-- Menu Navigasi -->
             <div class="flex flex-wrap md:flex-nowrap gap-2 md:gap-4 justify-center md:justify-end mt-2 md:mt-0">
                 <a href="{{ route('profil-desa') }}" class="bg-green-700 text-white px-4 py-2 rounded-lg shadow-md font-semibold text-sm text-center">Profil Desa</a>
-                <p class="bg-white px-4 py-2 rounded-lg shadow-md font-semibold text-gray-800 text-sm text-center">Desa Dalam Angka</p>
+                <a href="{{ route('desa-dalam-angka') }}" class="bg-white px-4 py-2 rounded-lg shadow-md font-semibold text-gray-800 text-sm text-center">Desa Dalam Angka</a>
                 <p class="bg-white px-4 py-2 rounded-lg shadow-md font-semibold text-gray-800 text-sm text-center">Desa Dalam Peta</p>
                 <p class="bg-white px-4 py-2 rounded-lg shadow-md font-semibold text-gray-800 text-sm text-center">Desa Dalam Grafik</p>
                 <p class="bg-white px-4 py-2 rounded-lg shadow-md font-semibold text-gray-800 text-sm text-center">Buku Monografi Desa</p>
@@ -32,34 +32,49 @@
     </div>    
 </body>
 <script>
-    function filterDesa() {
-        var selectedKecamatan = document.getElementById("kecamatan").value;
-        var desaDropdown = document.getElementById("desa");
-        var options = desaDropdown.getElementsByTagName("option");
+function filterData() {
+    const kategori = document.getElementById('kategori').value;
+    const dataSelect = document.getElementById('data');
+    const options = dataSelect.getElementsByTagName('option');
 
-        if (selectedKecamatan === "") {
-            desaDropdown.disabled = true;
-            for (var i = 0; i < options.length; i++) {
-                options[i].style.display = "none"; 
-            }
+    // Aktifkan/Nonaktifkan select data berdasarkan kategori yang dipilih
+    dataSelect.disabled = !kategori;
+
+    for (let i = 1; i < options.length; i++) {
+        const option = options[i];
+        if (option.getAttribute('data-kategori') === kategori) {
+            option.style.display = '';
         } else {
-            desaDropdown.disabled = false;
-            for (var i = 0; i < options.length; i++) {
-                var kecamatanAttr = options[i].getAttribute("data-kecamatan");
-
-                if (kecamatanAttr === selectedKecamatan) {
-                    options[i].style.display = "";
-                } else {
-                    options[i].style.display = "none";
-                }
-            }
+            option.style.display = 'none';
         }
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
-        filterDesa();
-    });
+    // Reset nilai select data
+    dataSelect.value = '';
+}
+
+function filterDesa() {
+    const kecamatan = document.getElementById('kecamatan').value;
+    const desaSelect = document.getElementById('desa');
+    const options = desaSelect.getElementsByTagName('option');
+
+    // Aktifkan/Nonaktifkan select desa berdasarkan kecamatan yang dipilih
+    desaSelect.disabled = !kecamatan;
+
+    for (let i = 1; i < options.length; i++) {
+        const option = options[i];
+        if (option.getAttribute('data-kecamatan') === kecamatan) {
+            option.style.display = '';
+        } else {
+            option.style.display = 'none';
+        }
+    }
+
+    // Reset nilai select desa
+    desaSelect.value = '';
+}
 </script>
+
 
 
 </html>

@@ -29,7 +29,7 @@
             </div>
             <div class="bg-white p-6 rounded-lg shadow-md text-black">
                 <img src="/storage/icon-data.svg" class="mx-auto mb-2" width="50">
-                <p class="font-semibold">Desa Dalam Angka</p>
+                <a href="{{ route('desa-dalam-angka') }}" class="font-semibold">Desa Dalam Angka</a>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-md text-black">
                 <img src="/storage/icon-map.svg" class="mx-auto mb-2" width="50">
