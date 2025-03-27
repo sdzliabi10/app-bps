@@ -6,7 +6,7 @@
         </a>
     </div>
     
-    <h3 class="text-xl font-bold mb-4 text-center">Jumlah Jenis Sarana Kesehatan Berdasarkan di Desa {{ request('desa') }} Kecamatan {{ request('kecamatan') }} - {{ request('tahun') }}</h3>
+    <h3 class="text-xl font-bold mb-4 text-center">Jumlah Jenis Sarana Kesehatan Berdasarkan di Desa {{ $desaName ?? 'Nama Desa' }} kecamatan {{ $kecamatanName ?? 'Nama Kecamatan' }}, Tahun {{ $tahun ?? 'Tahun' }}</h3>
     
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white border-collapse">

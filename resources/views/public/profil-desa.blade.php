@@ -368,6 +368,7 @@
                     <h2 class="text-2xl font-semibold text-gray-700 mb-4">LPMDK</h2>
                     <div class="overflow-x-auto">
                         @if (isset($lpmdk) && count($lpmdk) > 0)
+                        @if (isset($lpmdk) && count($lpmdk) > 0)
                             <table class="min-w-full bg-white">
                                 <thead>
                                     <tr>
@@ -380,6 +381,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($lpmdk as $item)
                                     @foreach ($lpmdk as $item)
                                         <tr>
                                             <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">
@@ -406,6 +408,7 @@
                     <h2 class="text-2xl font-semibold text-gray-700 mb-4">TP PKK Desa</h2>
                     <div class="overflow-x-auto">
                         @if (isset($pkkDesa) && count($pkkDesa) > 0)
+                        @if (isset($pkkDesa) && count($pkkDesa) > 0)
                             <table class="min-w-full bg-white">
                                 <thead>
                                     <tr>
@@ -418,6 +421,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($pkkDesa as $item)
                                     @foreach ($pkkDesa as $item)
                                         <tr>
                                             <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">

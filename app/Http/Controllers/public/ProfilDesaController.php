@@ -306,6 +306,8 @@ class ProfilDesaController extends Controller
             'bpd',
             'lpmdk',
             'pkkDesa',
+            'lpmdk',
+            'pkkDesa',
             'bumdes',
             'bumdesDetail',
             'peraturanDesas',

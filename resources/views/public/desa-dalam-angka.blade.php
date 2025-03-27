@@ -13,9 +13,7 @@
             <label for="tahun" class="block text-gray-700 font-semibold">Tahun</label>
             <select id="tahun" name="tahun" class="w-full md:w-40 p-2 border rounded-md">
                 <option value="">Pilih Tahun</option>
-                <option value="2024">2024</option>
-                <option value="2023">2023</option>
-                <option value="2022">2022</option>
+                <option value="">2025</option>
             </select>
         </div>
 
@@ -76,22 +74,5 @@
             Tampilkan Data
         </button>
     </form>
-
-    <!-- Tabel Hasil -->
-    @if (request('tahun') && request('kecamatan') && request('kategori') && request('data'))
-    @if (request('desa'))
-    <div id="tabelHasil" class="mt-6">
-        @include('public.desa angka.desa.Rumah-Warga')
-        @include('public.desa angka.desa.sarana-prasarana')
-        @include('public.desa angka.desa.sarana-pendukung')
-        @include('public.desa angka.desa.sarana-disabilitas')
-    </div>
-    @else
-    <div id="tabelHasil" class="mt-6">
-        @include('public.desa angka.kecamatan.tempat-tinggal')
-        @include('public.desa angka.kecamatan.sarana-ibadah')
-    </div>
-    @endif
-    @endif
 </div>
 @endsection
