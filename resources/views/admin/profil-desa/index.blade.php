@@ -85,8 +85,7 @@
                                 <tr>
                                     <th>Kecamatan</th>
                                     <th>Desa</th>
-                                    <th>Foto</th>
-                                    {{-- <th>Tahun</th> --}}
+                                    <th>Foto</th>                                    
                                     <th>Visi</th>
                                     <th>Misi</th>
                                     <th>Program Unggulan</th>
@@ -100,8 +99,7 @@
                                 @foreach ($profilDesas as $profilDesa)
                                     <tr>
                                         <td>{{ $profilDesa->desa->kecamatan->nmkec }}</td>
-                                        <td>{{ $profilDesa->desa->nmdesa }}</td>
-                                        {{-- <td>{{ $profilDesa->created_at->year }}</td> --}}
+                                        <td>{{ $profilDesa->desa->nmdesa }}</td>                                        
                                         <td>
                                             <img src="{{ asset('storage/' . $profilDesa->foto) }}" alt="Foto"
                                                 class="img-thumbnail" width="50">
@@ -135,15 +133,8 @@
             </div>
         </div>
     </main>
-@endsection
-
-@section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            new simpleDatatables.DataTable("#datatablesSimple");
-        });
+        console.log(typeof simpleDatatables); // Harusnya tidak undefined
     </script>
-
-
 @endsection
+

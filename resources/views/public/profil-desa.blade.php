@@ -543,12 +543,11 @@
                     </tbody>
                 </table>
 
-                {{-- Modal untuk Lihat Detail --}}
+                <!-- Modal untuk setiap kategori infrastruktur -->
                 @foreach ($infrastruktur as $item)
                     <div id="modal-detail-{{ $item['id'] }}"
                         class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center p-4 z-50 hidden">
-                        <div
-                            class="modal-content bg-white rounded-lg w-full max-w-2xl overflow-hidden shadow-xl transform transition-all">
+                        <div class="modal-content bg-white rounded-lg w-full max-w-2xl overflow-hidden shadow-xl transform transition-all">
                             <div class="flex justify-between items-center bg-blue-500 text-white p-4">
                                 <h3 class="text-lg font-semibold">Detail {{ $item['kategori'] }}</h3>
                                 <button data-modal-id="modal-detail-{{ $item['id'] }}"
@@ -584,8 +583,6 @@
                     </div>
                 @endforeach
             </div>
-
-
 
             {{-- transparansi --}}
             <div id="transparansi" class="content-section hidden p-6 bg-white rounded-lg shadow-md mt-6">
@@ -907,5 +904,8 @@
         });
     </script>
 @endsection
+
+
+
 
 
