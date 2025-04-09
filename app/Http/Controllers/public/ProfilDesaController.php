@@ -22,6 +22,8 @@ use App\Models\JalanKab;
 use App\Models\PusatPerdagangan;
 use App\Models\Irigasi;
 use App\Models\RumahPotongHewan;
+use App\Models\Transparansi;
+use App\Models\Kemiskinan;
 
 class ProfilDesaController extends Controller
 {
@@ -41,22 +43,8 @@ class ProfilDesaController extends Controller
         // Ambil data program bantuan dari database
         $programs = [];
 
-
-
         // Hitung total keluarga penerima
         $totalPenerima = collect($programs)->sum('jumlah_keluarga');
-
-        // Data infrastruktur dengan kategori tetap, tetapi nilai kosong
-        // $infrastruktur = [
-        //     ['kategori' => 'Jumlah Jembatan', 'nilai' => ''],
-        //     ['kategori' => 'Tempat Pembuangan Sampah', 'nilai' => ''],
-        //     ['kategori' => 'Jumlah Pasar', 'nilai' => ''],
-        //     ['kategori' => 'Jumlah Jalan Desa', 'nilai' => ''],
-        //     ['kategori' => 'Jumlah Jalan Kabupaten', 'nilai' => ''],
-        //     ['kategori' => 'Jumlah Irigasi', 'nilai' => ''],
-        //     ['kategori' => 'Jumlah Pusat Perdagangan', 'nilai' => ''],
-        //     ['kategori' => 'Jumlah Rumah Potong Hewan', 'nilai' => ''],
-        // ];
 
         $infrastruktur = [];
 
@@ -79,6 +67,12 @@ class ProfilDesaController extends Controller
         $pusatPerdagangan = [];
         $irigasi = [];
         $rumahPotongHewan = [];
+        $peraturanDesas = collect();
+        $edaranKepalaDesas = collect();
+        $programPusat = collect();
+        $programProvinsi = collect();
+        $programKabupaten = collect();
+        $programKemiskinan = [];
 
         if ($request->has('desa')) {
             $profilDesas = ProfilDesa::where('kddesa', $request->desa)->get();
@@ -278,7 +272,7 @@ class ProfilDesaController extends Controller
                 'columns' => ['Nama Irigasi', 'Panjang (m)', 'Lebar (m)', 'Kondisi', 'Lokasi'],
                 'data' => $irigasi->toArray()
             ];
-            
+
             $infrastruktur[] = [
                 'id' => 'rumah-potong-hewan',
                 'kategori' => 'Rumah Potong Hewan',
@@ -288,11 +282,40 @@ class ProfilDesaController extends Controller
             ];
 
             // Ambil data transparansi berdasarkan desa yang dipilih
-            // $peraturanDesas = PeraturanDesa::where('kddesa', $request->desa)->get();
-            // $edaranKepalaDesas = EdaranKepalaDesa::where('kddesa', $request->desa)->get();
-            // $programPusat = Program::where('kddesa', $request->desa)->where('sumber', 'Pusat')->get();
-            // $programProvinsi = Program::where('kddesa', $request->desa)->where('sumber', 'Provinsi')->get();
-            // $programKabupaten = Program::where('kddesa', $request->desa)->where('sumber', 'Kabupaten')->get();
+            $peraturanDesas = Transparansi::where('iddesa', $request->desa)
+                ->where('jenis', 'peraturan')
+                ->orderBy('tanggal', 'desc')
+                ->get();
+
+            $edaranKepalaDesas = Transparansi::where('iddesa', $request->desa)
+                ->where('jenis', 'edaran')
+                ->orderBy('tanggal', 'desc')
+                ->get();
+
+            // Ambil data program dengan eager loading untuk optimasi
+            $programPusat = Transparansi::where('iddesa', $request->desa)
+                ->where('jenis', 'program')
+                ->where('sumber', 'pusat')
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+            $programProvinsi = Transparansi::where('iddesa', $request->desa)
+                ->where('jenis', 'program')
+                ->where('sumber', 'provinsi')
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+            $programKabupaten = Transparansi::where('iddesa', $request->desa)
+                ->where('jenis', 'program')
+                ->where('sumber', 'kabupaten')
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+            $programKemiskinan = Kemiskinan::where('iddesa', $request->desa)
+                ->orderBy('nama_program')
+                ->get();
+
+            $totalPenerima = $programKemiskinan->sum('jumlah_penerima');
         }
 
         return view('public.profil-desa', compact(
@@ -320,7 +343,9 @@ class ProfilDesaController extends Controller
             'infrastruktur',
             'pusatPerdagangan',
             'irigasi',
-            'rumahPotongHewan'
+            'rumahPotongHewan',
+            'programKemiskinan',
+            'totalPenerima',
         ));
     }
 }

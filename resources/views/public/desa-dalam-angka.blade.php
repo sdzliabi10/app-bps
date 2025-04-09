@@ -1,78 +1,134 @@
-{{-- resources/views/public/desa-dalam-angka.blade.php --}}
 @extends('public.layouts.app')
 
 @section('title', 'Desa Dalam Angka')
 
 @section('content')
-<div class="bg-white p-6 rounded-lg shadow-md">
-    <h2 class="text-xl font-bold mb-4">Desa Dalam Angka</h2>
-    <!-- Form Filter -->
-    <form id="filterForm" class="mt-6 flex flex-wrap items-end gap-4" action="{{ route('desa-dalam-angka') }}" method="GET">
-        <!-- Tahun -->
-        <div class="w-full md:w-auto">
-            <label for="tahun" class="block text-gray-700 font-semibold">Tahun</label>
-            <select id="tahun" name="tahun" class="w-full md:w-40 p-2 border rounded-md">
-                <option value="">Pilih Tahun</option>
-                <option value="">2025</option>
-            </select>
-        </div>
+    <div class="container mx-auto p-6">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4">Desa Dalam Angka</h2>
+            <!-- Form Filter -->
+            <form id="filterForm" class="mt-6 flex flex-wrap items-end gap-4" action="{{ route('desa-dalam-angka') }}"
+                method="GET">
+                <!-- Tahun -->
+                <div class="w-full md:w-auto">
+                    <label for="tahun" class="block text-gray-700 font-semibold">Tahun</label>
+                    <select id="tahun" name="tahun" class="w-full md:w-40 p-2 border rounded-md">
+                        <option value="">Pilih Tahun</option>
+                        <option value="">2025</option>
+                    </select>
+                </div>
 
-        <!-- Kategori -->
-        <div class="w-full md:w-auto">
-            <label for="kategori" class="block text-gray-700 font-semibold">Kategori</label>
-            <select id="kategori" name="kategori" class="w-full md:w-40 p-2 border rounded-md" onchange="filterData()">
-                <option value="">Pilih Kategori</option>
-                @foreach ($kategoriList as $kategori)
-                <option value="{{ $kategori->kd_Kategori }}" {{ request('kategori') == $kategori->kd_Kategori ? 'selected' : '' }}>
-                    {{ $kategori->nama_Kategori }}
-                </option>
-                @endforeach
-            </select>
-        </div>
+                <!-- Kategori -->
+                <div class="w-full md:w-auto">
+                    <label for="kategori" class="block text-gray-700 font-semibold">Kategori</label>
+                    <select id="kategori" name="kategori" class="w-full md:w-40 p-2 border rounded-md"
+                        onchange="filterData()">
+                        <option value="">Pilih Kategori</option>
+                        @foreach ($kategoriList as $kategori)
+                            <option value="{{ $kategori->kd_kategori }}"
+                                {{ request('kategori') == $kategori->kd_kategori ? 'selected' : '' }}>
+                                {{ $kategori->nama_kategori }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-        <!-- Data -->
-        <div class="w-full md:w-auto">
-            <label for="data" class="block text-gray-700 font-semibold">Data</label>
-            <select id="data" name="data" class="w-full md:w-40 p-2 border rounded-md" disabled>
-                <option value="">Pilih Data</option>
-                @foreach ($dataKategoriList as $data)
-                <option value="{{ $data->id }}" data-kategori="{{ $data->kd_Kategori }}" {{ request('data') == $data->id ? 'selected' : '' }}>
-                    {{ $data->nama_data }}
-                </option>
-                @endforeach
-            </select>
-        </div>
+                <!-- Data -->
+                <div class="w-full md:w-auto">
+                    <label for="data" class="block text-gray-700 font-semibold">Data</label>
+                    <select id="data" name="data" class="w-full md:w-40 p-2 border rounded-md" disabled>
+                        <option value="">Pilih Data</option>
+                        @foreach ($dataKategoriList as $data)
+                            <option value="{{ $data->id }}" data-kategori="{{ $data->kd_kategori }}"
+                                {{ request('data') == $data->id ? 'selected' : '' }}>
+                                {{ $data->nama_data }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-        <!-- Kecamatan -->
-        <div class="w-full md:w-auto">
-            <label for="kecamatan" class="block text-gray-700 font-semibold">Kecamatan</label>
-            <select id="kecamatan" name="kecamatan" class="w-full md:w-40 p-2 border rounded-md" onchange="filterDesa()">
-                <option value="">Pilih Kecamatan</option>
-                @foreach ($kecamatanList as $kecamatan)
-                <option value="{{ $kecamatan->kdkec }}" {{ request('kecamatan') == $kecamatan->kdkec ? 'selected' : '' }}>
-                    {{ $kecamatan->nmkec }}
-                </option>
-                @endforeach
-            </select>
-        </div>
+                <!-- Kecamatan -->
+                <div class="w-full md:w-auto">
+                    <label for="kecamatan" class="block text-gray-700 font-semibold">Kecamatan</label>
+                    <select id="kecamatan" name="kecamatan" class="w-full md:w-40 p-2 border rounded-md"
+                        onchange="filterDesa()">
+                        <option value="">Pilih Kecamatan</option>
+                        @foreach ($kecamatanList as $kecamatan)
+                            <option value="{{ $kecamatan->kdkec }}"
+                                {{ request('kecamatan') == $kecamatan->kdkec ? 'selected' : '' }}>
+                                {{ $kecamatan->nmkec }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-        <!-- Desa -->
-        <div class="w-full md:w-auto">
-            <label for="desa" class="block text-gray-700 font-semibold">Desa</label>
-            <select id="desa" name="desa" class="w-full md:w-40 p-2 border rounded-md" disabled>
-                <option value="">Pilih Desa</option>
-                @foreach ($desaList as $desa)
-                <option value="{{ $desa->iddesa }}" data-kecamatan="{{ $desa->kdkec }}" style="display: none;">
-                    {{ $desa->nmdesa }}
-                </option>
-                @endforeach
-            </select>
-        </div>
+                <!-- Desa -->
+                <div class="w-full md:w-auto">
+                    <label for="desa" class="block text-gray-700 font-semibold">Desa</label>
+                    <select id="desa" name="desa" class="w-full md:w-40 p-2 border rounded-md" disabled>
+                        <option value="">Pilih Desa</option>
+                        @foreach ($desaList as $desa)
+                            <option value="{{ $desa->iddesa }}" data-kecamatan="{{ $desa->kdkec }}"
+                                style="display: none;">
+                                {{ $desa->nmdesa }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
-        <!-- Button Tampilkan Data -->
-        <button type="submit" class="w-full md:w-auto bg-green-600 text-white px-6 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-300">
-            Tampilkan Data
-        </button>
-    </form>
-</div>
+                <!-- Button Tampilkan Data -->
+                <button type="submit"
+                    class="w-full md:w-auto bg-green-600 text-white px-6 py-2 rounded-md font-semibold hover:bg-green-700 transition duration-300">
+                    Tampilkan Data
+                </button>
+            </form>
+        </div>
+    </div>
+
+@endsection
+
+@section('scripts')
+    <script>
+        function filterData() {
+            const kategoriSelect = document.getElementById('kategori');
+            const dataSelect = document.getElementById('data');
+            const selectedKategori = kategoriSelect.value;
+
+            // Enable/disable data select based on kategori selection
+            dataSelect.disabled = !selectedKategori;
+
+            // Show/hide data options based on selected kategori
+            Array.from(dataSelect.options).forEach(option => {
+                if (option.value === '' || option.getAttribute('data-kategori') === selectedKategori) {
+                    option.style.display = 'block';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+
+            // Reset data selection
+            dataSelect.value = '';
+        }
+
+        function filterDesa() {
+            const kecamatanSelect = document.getElementById('kecamatan');
+            const desaSelect = document.getElementById('desa');
+            const selectedKecamatan = kecamatanSelect.value;
+
+            // Enable/disable desa select based on kecamatan selection
+            desaSelect.disabled = !selectedKecamatan;
+
+            // Show/hide desa options based on selected kecamatan
+            Array.from(desaSelect.options).forEach(option => {
+                if (option.value === '' || option.getAttribute('data-kecamatan') === selectedKecamatan) {
+                    option.style.display = 'block';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+
+            // Reset desa selection
+            desaSelect.value = '';
+        }
+    </script>
 @endsection
