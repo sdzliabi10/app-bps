@@ -370,11 +370,9 @@
                             <table class="min-w-full bg-white">
                                 <thead>
                                     <tr>
-                                        <th
-                                            class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                        <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
                                             Data</th>
-                                        <th
-                                            class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                        <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
                                             Jumlah</th>
                                     </tr>
                                 </thead>
@@ -408,11 +406,9 @@
                             <table class="min-w-full bg-white">
                                 <thead>
                                     <tr>
-                                        <th
-                                            class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                        <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
                                             Data</th>
-                                        <th
-                                            class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                        <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
                                             Jumlah</th>
                                     </tr>
                                 </thead>
