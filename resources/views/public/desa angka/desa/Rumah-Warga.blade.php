@@ -1,13 +1,12 @@
 {{-- resources/views/public/desa/warga-rumah.blade.php --}}
 <div class="bg-gray-50 p-6 rounded-lg shadow-md">
-    <!-- Tombol Download Excel -->
     <div class="flex justify-end mb-4">
         <a href="" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200">
             <i class="fas fa-download mr-2"></i> Download Excel
         </a>
     </div>
     
-    <h3 class="text-xl font-bold mb-4 text-center">Jumlah Warga, Rumah dan Rumah Tidak Layak Huni di desa {{ request('desa') }} kecamatan {{ request('kecamatan') }}, Tahun {{ request('tahun') }}</h3>
+    <h3 class="text-xl font-bold mb-4 text-center">Jumlah Warga, Rumah dan Rumah Tidak Layak Huni di desa {{ $desaName }} kecamatan {{ $kecamatanName }}, Tahun {{ $tahun }}</h3>
     
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white border-collapse">
