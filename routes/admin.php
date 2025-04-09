@@ -14,6 +14,8 @@ use App\Http\Controllers\Backend\JalanKabController;
 use App\Http\Controllers\Backend\PusatPerdaganganController;
 use App\Http\Controllers\Backend\IrigasiController;
 use App\Http\Controllers\Backend\RumahPotongHewanController;
+use App\Http\Controllers\Backend\TransparansiController;
+use App\Http\Controllers\Backend\KemiskinanController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/test', function () {
@@ -42,12 +44,16 @@ Route::resource('jalan-kabupaten', JalanKabController::class);
 Route::resource('pusat-perdagangan', PusatPerdaganganController::class);
 Route::resource('irigasi', IrigasiController::class);
 Route::resource('rumah-potong-hewan', RumahPotongHewanController::class);
+Route::resource('transparansi', TransparansiController::class);
+Route::resource('kemiskinan', KemiskinanController::class);
 
 // Route::resource('perangkat-desa', ProfilDesaController::class);
 
 // Route::get('/admin-profil', function () {
 //     return view('/admin/profil-desa/index');
 // });
+
+
 
 
 

@@ -8,8 +8,7 @@
         <p class="mt-4 text-gray-600">Informasi mengenai desa dan kelurahan...</p>
 
         <!-- Form Filter -->
-        <form id="filterForm" class="mt-6 flex flex-wrap items-end gap-4" action="" {{ route('profil-desa') }}"
-            method="GET">
+        <form id="filterForm" class="mt-6 flex flex-wrap items-end gap-4" action="{{ route('profil-desa') }}" method="GET">
             <div class="w-full md:w-auto">
                 <label for="kecamatan" class="block text-gray-700 font-semibold">Kecamatan</label>
                 <select id="kecamatan" name="kecamatan" class="w-full md:w-40 p-2 border rounded-md"
@@ -439,23 +438,32 @@
                 <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
                     <h2 class="text-2xl font-semibold text-gray-700 mb-4">Bumdes (Badan Usaha Milik Desa)</h2>
                     <div class="overflow-x-auto">
-                        @if(isset($bumdes) && count($bumdes) > 0)
+                        @if (isset($bumdes) && count($bumdes) > 0)
                             <table class="min-w-full bg-white">
                                 <thead>
                                     <tr>
-                                        <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">Data</th>
-                                        <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">Jumlah</th>
-                                        <th class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">Aksi</th>
+                                        <th
+                                            class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                            Data</th>
+                                        <th
+                                            class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                            Jumlah</th>
+                                        <th
+                                            class="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                            Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($bumdes as $item)
+                                    @foreach ($bumdes as $item)
                                         <tr>
-                                            <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">{{ $item['data'] }}</td>
-                                            <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">{{ $item['jumlah'] }}</td>
                                             <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">
-                                                <button class="open-modal bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition duration-300" 
-                                                        data-modal-id="modal-bumdes">
+                                                {{ $item['data'] }}</td>
+                                            <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">
+                                                {{ $item['jumlah'] }}</td>
+                                            <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">
+                                                <button
+                                                    class="open-modal bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition duration-300"
+                                                    data-modal-id="modal-bumdes">
                                                     Lihat Detail
                                                 </button>
                                             </td>
@@ -470,27 +478,35 @@
                 </div>
             </div>
             <!-- Modal Bumdes -->
-            <div id="modal-bumdes" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center p-4 z-50 hidden">
-                <div class="modal-content bg-white rounded-lg w-full max-w-2xl overflow-hidden shadow-xl transform transition-all">
+            <div id="modal-bumdes"
+                class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center p-4 z-50 hidden">
+                <div
+                    class="modal-content bg-white rounded-lg w-full max-w-2xl overflow-hidden shadow-xl transform transition-all">
                     <div class="flex justify-between items-center bg-blue-500 text-white p-4">
                         <h3 class="text-xl font-semibold">Detail BUMDes</h3>
-                        <button class="close-modal text-white hover:text-gray-200 text-2xl" 
-                                data-modal-id="modal-bumdes">&times;</button>
+                        <button class="close-modal text-white hover:text-gray-200 text-2xl"
+                            data-modal-id="modal-bumdes">&times;</button>
                     </div>
                     <div class="p-6">
-                        @if(isset($bumdesDetail) && count($bumdesDetail) > 0)
+                        @if (isset($bumdesDetail) && count($bumdesDetail) > 0)
                             <table class="min-w-full bg-white">
                                 <thead>
                                     <tr>
-                                        <th class="py-2 px-4 border border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">Nama BUMDes</th>
-                                        <th class="py-2 px-4 border border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">Deskripsi</th>
+                                        <th
+                                            class="py-2 px-4 border border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                            Nama BUMDes</th>
+                                        <th
+                                            class="py-2 px-4 border border-gray-200 bg-gray-50 text-left text-sm font-semibold text-gray-600">
+                                            Deskripsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($bumdesDetail as $detail)
+                                    @foreach ($bumdesDetail as $detail)
                                         <tr>
-                                            <td class="py-2 px-4 border border-gray-200 text-sm text-gray-700">{{ $detail['nama'] }}</td>
-                                            <td class="py-2 px-4 border border-gray-200 text-sm text-gray-700">{{ $detail['deskripsi'] }}</td>
+                                            <td class="py-2 px-4 border border-gray-200 text-sm text-gray-700">
+                                                {{ $detail['nama'] }}</td>
+                                            <td class="py-2 px-4 border border-gray-200 text-sm text-gray-700">
+                                                {{ $detail['deskripsi'] }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -500,8 +516,9 @@
                         @endif
                     </div>
                     <div class="bg-gray-50 px-6 py-4 flex justify-end">
-                        <button class="close-modal bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-300" 
-                                data-modal-id="modal-bumdes">
+                        <button
+                            class="close-modal bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-300"
+                            data-modal-id="modal-bumdes">
                             Tutup
                         </button>
                     </div>
@@ -543,7 +560,8 @@
                 @foreach ($infrastruktur as $item)
                     <div id="modal-detail-{{ $item['id'] }}"
                         class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center p-4 z-50 hidden">
-                        <div class="modal-content bg-white rounded-lg w-full max-w-2xl overflow-hidden shadow-xl transform transition-all">
+                        <div
+                            class="modal-content bg-white rounded-lg w-full max-w-2xl overflow-hidden shadow-xl transform transition-all">
                             <div class="flex justify-between items-center bg-blue-500 text-white p-4">
                                 <h3 class="text-lg font-semibold">Detail {{ $item['kategori'] }}</h3>
                                 <button data-modal-id="modal-detail-{{ $item['id'] }}"
@@ -582,210 +600,268 @@
 
             {{-- transparansi --}}
             <div id="transparansi" class="content-section hidden p-6 bg-white rounded-lg shadow-md mt-6">
-                Tabel Peraturan Desa
+                <!-- Peraturan Desa -->
                 <div class="mb-8">
-                    <h2 class="text-xl font-semibold mb-4">Jumlah Peraturan Desa: {{ count($peraturanDesas) }}</h2>
+                    <h2 class="text-xl font-semibold mb-4">Peraturan Desa</h2>
                     <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
                         <thead class="bg-gray-100">
                             <tr>
                                 <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Judul
-                                    Peraturan Desa</th>
+                                    Peraturan</th>
                                 <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Nomor
-                                    Peraturan Desa</th>
+                                </th>
                                 <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">
                                     Tanggal</th>
+                                <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">
+                                    Dokumen</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($peraturanDesas as $peraturan)
-                                <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="py-3 px-4 border-2 border-gray-200">{{ $peraturan->judul }}</td>
-                                    <td class="py-3 px-4 border-2 border-gray-200">{{ $peraturan->nomor }}</td>
-                                    <td class="py-3 px-4 border-2 border-gray-200">
-                                        {{ $peraturan->tanggal->format('d/m/Y') }}</td>
-                                </tr>
-                            @empty
                                 <tr>
-                                    <td colspan="3" class="py-3 px-4 border-2 border-gray-200 text-center">Tidak ada
-                                        data</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Tabel Edaran Kepala Desa -->
-                <div class="mb-8">
-                    <h2 class="text-xl font-semibold mb-4">Jumlah Edaran Kepala Desa: {{ count($edaranKepalaDesas) }}</h2>
-                    <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
-                        <thead class="bg-gray-100">
-                            <tr>
-                                <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Judul
-                                    Edaran</th>
-                                <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Nomor
-                                    Edaran</th>
-                                <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">
-                                    Tanggal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($edaranKepalaDesas as $edaran)
-                                <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="py-3 px-4 border-2 border-gray-200">{{ $edaran->judul }}</td>
-                                    <td class="py-3 px-4 border-2 border-gray-200">{{ $edaran->nomor }}</td>
-                                    <td class="py-3 px-4 border-2 border-gray-200">{{ $edaran->tanggal->format('d/m/Y') }}
+                                    <td class="py-2 px-4 border-2 border-gray-300">{{ $peraturan->judul }}</td>
+                                    <td class="py-2 px-4 border-2 border-gray-300">{{ $peraturan->nomor }}</td>
+                                    <td class="py-2 px-4 border-2 border-gray-300">
+                                        {{ $peraturan->tanggal->format('d/m/Y') }}</td>
+                                    <td class="py-2 px-4 border-2 border-gray-300">
+                                        @if ($peraturan->file)
+                                            <a href="{{ asset('storage/' . $peraturan->file) }}"
+                                                class="text-blue-600 hover:text-blue-800" target="_blank">Lihat
+                                                Dokumen</a>
+                                        @else
+                                            <span class="text-gray-500">Tidak ada dokumen</span>
+                                        @endif
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" class="py-3 px-4 border-2 border-gray-200 text-center">Tidak ada
-                                        data</td>
+                                    <td colspan="4"
+                                        class="py-2 px-4 border-2 border-gray-300 text-center text-gray-500">
+                                        Tidak ada data peraturan desa
+                                    </td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
                 </div>
 
-                <!-- Tabel Program yang Diterima -->
-                <div>
-                    <h2 class="text-xl font-semibold mb-4">
-                        Jumlah Program yang Diterima:
-                        {{ count($programPusat) + count($programProvinsi) + count($programKabupaten) }}
-                    </h2>
+                <!-- Surat Edaran -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-semibold mb-4">Surat Edaran Kepala Desa</h2>
+                    <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Judul
+                                    Surat Edaran</th>
+                                <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">Nomor
+                                </th>
+                                <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">
+                                    Tanggal</th>
+                                <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">
+                                    Dokumen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($edaranKepalaDesas as $edaran)
+                                <tr>
+                                    <td class="py-2 px-4 border-2 border-gray-300">{{ $edaran->judul }}</td>
+                                    <td class="py-2 px-4 border-2 border-gray-300">{{ $edaran->nomor }}</td>
+                                    <td class="py-2 px-4 border-2 border-gray-300">{{ $edaran->tanggal->format('d/m/Y') }}
+                                    </td>
+                                    <td class="py-2 px-4 border-2 border-gray-300">
+                                        @if ($edaran->file)
+                                            <a href="{{ asset('storage/' . $edaran->file) }}"
+                                                class="text-blue-600 hover:text-blue-800" target="_blank">Lihat
+                                                Dokumen</a>
+                                        @else
+                                            <span class="text-gray-500">Tidak ada dokumen</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4"
+                                        class="py-2 px-4 border-2 border-gray-300 text-center text-gray-500">
+                                        Tidak ada data surat edaran
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Section Program dalam div transparansi -->
+                <div class="mt-8">
+                    <h2 class="text-xl font-semibold mb-4">Program</h2>
 
                     <!-- Program Pusat -->
-                    <div class="mb-6">
-                        <h3 class="text-lg font-semibold mb-2">Pemerintah Pusat: {{ $programPusat->count() }}</h3>
-                        <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
-                            <thead class="bg-gray-100">
-                                <tr>
-                                    <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">
-                                        Nama Program</th>
-                                    <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">
-                                        Anggaran (Ribu Rupiah)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($programPusat as $program)
-                                    <tr class="hover:bg-gray-50 transition-colors">
-                                        <td class="py-3 px-4 border-2 border-gray-200">{{ $program->nama }}</td>
-                                        <td class="py-3 px-4 border-2 border-gray-200">
-                                            {{ number_format($program->anggaran, 0, ',', '.') }}</td>
-                                    </tr>
-                                @empty
+                    <div class="mb-8">
+                        <h3 class="text-lg font-medium mb-2 text-blue-600">Program Pemerintah Pusat</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg">
+                                <thead class="bg-gray-100">
                                     <tr>
-                                        <td colspan="2" class="py-3 px-4 border-2 border-gray-200 text-center">Tidak
-                                            ada data</td>
+                                        <th class="py-3 px-4 border-2 border-gray-300 text-left">Nama Program</th>
+                                        <th class="py-3 px-4 border-2 border-gray-300 text-left">Anggaran</th>
+                                        <th class="py-3 px-4 border-2 border-gray-300 text-left">Dokumen</th>
                                     </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @forelse($programPusat as $program)
+                                        <tr>
+                                            <td class="py-2 px-4 border-2 border-gray-300">{{ $program->nama }}</td>
+                                            <td class="py-2 px-4 border-2 border-gray-300">Rp {{ number_format($program->anggaran, 0, ',', '.') }}</td>
+                                            <td class="py-2 px-4 border-2 border-gray-300">
+                                                @if ($program->file)
+                                                    <a href="{{ asset('storage/' . $program->file) }}" 
+                                                       class="text-blue-600 hover:text-blue-800" 
+                                                       target="_blank">Lihat Dokumen</a>
+                                                @else
+                                                    <span class="text-gray-500">Tidak ada dokumen</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3" class="py-2 px-4 border-2 border-gray-300 text-center text-gray-500">
+                                                Tidak ada data program pusat
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <!-- Program Provinsi -->
-                    <div class="mb-6">
-                        <h3 class="text-lg font-semibold mb-2">Pemerintah Provinsi: {{ $programProvinsi->count() }}</h3>
-                        <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
-                            <thead class="bg-gray-100">
-                                <tr>
-                                    <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">
-                                        Nama Program</th>
-                                    <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">
-                                        Anggaran (Ribu Rupiah)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($programProvinsi as $program)
-                                    <tr class="hover:bg-gray-50 transition-colors">
-                                        <td class="py-3 px-4 border-2 border-gray-200">{{ $program->nama }}</td>
-                                        <td class="py-3 px-4 border-2 border-gray-200">
-                                            {{ number_format($program->anggaran, 0, ',', '.') }}</td>
-                                    </tr>
-                                @empty
+                    <div class="mb-8">
+                        <h3 class="text-lg font-medium mb-2 text-green-600">Program Pemerintah Provinsi</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg">
+                                <thead class="bg-gray-100">
                                     <tr>
-                                        <td colspan="2" class="py-3 px-4 border-2 border-gray-200 text-center">Tidak
-                                            ada data</td>
+                                        <th class="py-3 px-4 border-2 border-gray-300 text-left">Nama Program</th>
+                                        <th class="py-3 px-4 border-2 border-gray-300 text-left">Anggaran</th>
+                                        <th class="py-3 px-4 border-2 border-gray-300 text-left">Dokumen</th>
                                     </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @forelse($programProvinsi as $program)
+                                        <tr>
+                                            <td class="py-2 px-4 border-2 border-gray-300">{{ $program->nama }}</td>
+                                            <td class="py-2 px-4 border-2 border-gray-300">Rp {{ number_format($program->anggaran, 0, ',', '.') }}</td>
+                                            <td class="py-2 px-4 border-2 border-gray-300">
+                                                @if ($program->file)
+                                                    <a href="{{ asset('storage/' . $program->file) }}" 
+                                                       class="text-blue-600 hover:text-blue-800" 
+                                                       target="_blank">Lihat Dokumen</a>
+                                                @else
+                                                    <span class="text-gray-500">Tidak ada dokumen</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3" class="py-2 px-4 border-2 border-gray-300 text-center text-gray-500">
+                                                Tidak ada data program provinsi
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <!-- Program Kabupaten -->
-                    <div>
-                        <h3 class="text-lg font-semibold mb-2">Pemerintah Kabupaten: {{ $programKabupaten->count() }}</h3>
-                        <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg overflow-hidden">
+                    <div class="mb-8">
+                        <h3 class="text-lg font-medium mb-2 text-red-600">Program Pemerintah Kabupaten</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg">
+                                <thead class="bg-gray-100">
+                                    <tr>
+                                        <th class="py-3 px-4 border-2 border-gray-300 text-left">Nama Program</th>
+                                        <th class="py-3 px-4 border-2 border-gray-300 text-left">Anggaran</th>
+                                        <th class="py-3 px-4 border-2 border-gray-300 text-left">Dokumen</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse($programKabupaten as $program)
+                                        <tr>
+                                            <td class="py-2 px-4 border-2 border-gray-300">{{ $program->nama }}</td>
+                                            <td class="py-2 px-4 border-2 border-gray-300">Rp {{ number_format($program->anggaran, 0, ',', '.') }}</td>
+                                            <td class="py-2 px-4 border-2 border-gray-300">
+                                                @if ($program->file)
+                                                    <a href="{{ asset('storage/' . $program->file) }}" 
+                                                       class="text-blue-600 hover:text-blue-800" 
+                                                       target="_blank">Lihat Dokumen</a>
+                                                @else
+                                                    <span class="text-gray-500">Tidak ada dokumen</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3" class="py-2 px-4 border-2 border-gray-300 text-center text-gray-500">
+                                                Tidak ada data program kabupaten
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {{-- kemiskinan --}}
+            <div id="program-tidak-mampu" class="content-section hidden">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Program Penanggulangan Kemiskinan</h2>
+
+                    <div class="mb-8 bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-blue-500 text-white mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm text-blue-600 font-semibold">Total Penerima Bantuan</p>
+                                <p class="text-2xl font-bold text-blue-800">{{ number_format($totalPenerima, 0, ',', '.') }} Keluarga</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white border-2 border-gray-300 rounded-lg">
                             <thead class="bg-gray-100">
                                 <tr>
-                                    <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">
-                                        Nama Program</th>
-                                    <th class="py-3 px-4 border-2 border-gray-300 text-left font-semibold text-gray-700">
-                                        Anggaran (Ribu Rupiah)</th>
+                                    <th class="py-3 px-4 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-700">No</th>
+                                    <th class="py-3 px-4 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-700">Nama Program</th>
+                                    <th class="py-3 px-4 border-b-2 border-gray-300 text-left text-sm font-semibold text-gray-700">Jumlah Penerima</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @forelse($programKabupaten as $program)
-                                    <tr class="hover:bg-gray-50 transition-colors">
-                                        <td class="py-3 px-4 border-2 border-gray-200">{{ $program->nama }}</td>
-                                        <td class="py-3 px-4 border-2 border-gray-200">
-                                            {{ number_format($program->anggaran, 0, ',', '.') }}</td>
+                            <tbody class="divide-y divide-gray-200">
+                                @forelse($programKemiskinan as $index => $program)
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-3 px-4 text-gray-700">{{ $index + 1 }}</td>
+                                        <td class="py-3 px-4 text-gray-700">{{ $program->nama_program }}</td>
+                                        <td class="py-3 px-4 text-gray-700">{{ number_format($program->jumlah_penerima, 0, ',', '.') }} Keluarga</td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="2" class="py-3 px-4 border-2 border-gray-200 text-center">Tidak
-                                            ada data</td>
+                                        <td colspan="3" class="py-4 px-4 text-center text-gray-500 italic">
+                                            Belum ada data program penanggulangan kemiskinan yang tersedia
+                                        </td>
                                     </tr>
                                 @endforelse
                             </tbody>
                         </table>
-                    </div>
+                    </div>                  
                 </div>
             </div>
         </div>
-
-        {{-- kemiskinan --}}
-        <div id="program-tidak-mampu" class="content-section hidden">
-            <p class="mt-4 text-gray-600">Informasi mengenai program untuk warga tidak mampu...</p>
-
-            <div class="mt-6 bg-gray-50 p-4 rounded-lg shadow-sm">
-                <p class="text-lg text-gray-700">
-                    <span class="font-semibold">Jumlah Keluarga Penerima Program Penanggulangan Kemiskinan:</span>
-                    <span class="font-bold text-blue-600">{{ $totalPenerima }} keluarga</span>
-                </p>
-            </div>
-
-            <div class="mt-6">
-                <h2 class="text-2xl font-semibold text-gray-700">Detail Program Bantuan</h2>
-                <table class="min-w-full mt-4 bg-white border border-gray-300">
-                    <thead>
-                        <tr class="bg-gray-100">
-                            <th class="py-3 px-4 border border-gray-300 text-left text-gray-700">Nama Program</th>
-                            <th class="py-3 px-4 border border-gray-300 text-left text-gray-700">Jumlah Keluarga Penerima
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (count($programs) > 0)
-                            <!-- Tampilkan data dari array jika ada -->
-                            @foreach ($programs as $program)
-                                <tr>
-                                    <td class="py-3 px-4 border border-gray-300">{{ $program['nama_program'] }}</td>
-                                    <td class="py-3 px-4 border border-gray-300">{{ $program['jumlah_keluarga'] }}</td>
-                                </tr>
-                            @endforeach
-                        @else
-                            <!-- Tampilkan pesan jika tidak ada data -->
-                            <tr>
-                                <td colspan="2" class="py-3 px-4 border border-gray-300 text-center text-gray-500">
-                                    Tidak ada data program bantuan.
-                                </td>
-                            </tr>
-                        @endif
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
     </div>
 
     <script>
@@ -900,3 +976,5 @@
         });
     </script>
 @endsection
+
+
