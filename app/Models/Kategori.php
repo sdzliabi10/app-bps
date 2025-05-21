@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kategori extends Model
 {
+    protected $table = 'kategoris';
     protected $primaryKey = 'kd_kategori';
     protected $keyType = 'string';
     public $incrementing = false;

@@ -22,65 +22,85 @@ class Desa extends Model
     {
         return $this->hasMany(ProfilDesa::class, 'iddesa');
     }
-    
-    public function perangkatDesa(){        
+
+    public function perangkatDesa()
+    {
         return $this->hasMany(PerangkatDesa::class, 'iddesa');
     }
-    public function lpmdk(){        
+    public function lpmdk()
+    {
         return $this->hasMany(Lpmdk::class, 'iddesa');
     }
-    public function pkk_desas(){        
+    public function pkk_desas()
+    {
         return $this->hasMany(PkkDesa::class, 'iddesa');
     }
-    public function jembatan(){        
+    public function jembatan()
+    {
         return $this->hasMany(Jembatan::class, 'iddesa');
     }
 
+    public function tempatIbadah()
+    {
+        return $this->hasMany(TempatIbadah::class, 'iddesa');
+    }
+
+    public function jembatan_peta()
+    {
+        return $this->hasMany(Jembatan_peta::class, 'iddesa', 'iddesa');
+    }
+
+    public function sekolah_peta()
+    {
+        return $this->hasMany(SekolahPeta::class, 'iddesa', 'iddesa');
+    }
+
+
     // Relasi ke tabel Struktur Perangkat Desa
-//     public function perangkat()
-//     {
-//         return $this->hasMany(StrukturPerangkatDesa::class, 'id_desa');
-//     }
+    //     public function perangkat()
+    //     {
+    //         return $this->hasMany(StrukturPerangkatDesa::class, 'id_desa');
+    //     }
 
-//     // Relasi ke tabel Keuangan
-//     public function keuangan()
-//     {
-//         return $this->hasMany(Keuangan::class, 'id_desa');
-//     }
+    //     // Relasi ke tabel Keuangan
+    //     public function keuangan()
+    //     {
+    //         return $this->hasMany(Keuangan::class, 'id_desa');
+    //     }
 
-//     // Relasi ke tabel Sarana Pendidikan
-//     public function saranaPendidikan()
-//     {
-//         return $this->hasMany(SaranaPendidikan::class, 'id_desa');
-//     }
+    //     // Relasi ke tabel Sarana Pendidikan
+    //     public function saranaPendidikan()
+    //     {
+    //         return $this->hasMany(SaranaPendidikan::class, 'id_desa');
+    //     }
 
-//     // Relasi ke tabel Sarana Ibadah
-//     public function saranaIbadah()
-//     {
-//         return $this->hasMany(SaranaIbadah::class, 'id_desa');
-//     }
+    //     // Relasi ke tabel Sarana Ibadah
+    //     public function saranaIbadah()
+    //     {
+    //         return $this->hasMany(SaranaIbadah::class, 'id_desa');
+    //     }
 
-//     // Relasi ke tabel Sarana Kesehatan
-//     public function saranaKesehatan()
-//     {
-//         return $this->hasMany(SaranaKesehatan::class, 'id_desa');
-//     }
+    //     // Relasi ke tabel Sarana Kesehatan
+    //     public function saranaKesehatan()
+    //     {
+    //         return $this->hasMany(SaranaKesehatan::class, 'id_desa');
+    //     }
 
-//     // Relasi ke tabel Sarana Olahraga
-//     public function saranaOlahraga()
-//     {
-//         return $this->hasMany(SaranaOlahraga::class, 'id_desa');
-//     }
+    //     // Relasi ke tabel Sarana Olahraga
+    //     public function saranaOlahraga()
+    //     {
+    //         return $this->hasMany(SaranaOlahraga::class, 'id_desa');
+    //     }
 
-//     // Relasi ke tabel Ekonomi
-//     public function ekonomi()
-//     {
-//         return $this->hasMany(Ekonomi::class, 'id_desa');
-//     }
+    //     // Relasi ke tabel Ekonomi
+    //     public function ekonomi()
+    //     {
+    //         return $this->hasMany(Ekonomi::class, 'id_desa');
+    //     }
 
-//     // Relasi ke tabel Transportasi
-//     public function transportasi()
-//     {
-//         return $this->hasMany(Transportasi::class, 'id_desa');
-//     }
+    //     // Relasi ke tabel Transportasi
+    //     public function transportasi()
+    //     {
+    //         return $this->hasMany(Transportasi::class, 'id_desa');
+    //     }
 }

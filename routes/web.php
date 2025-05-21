@@ -2,6 +2,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Public\ProfilDesaController;
 use App\Http\Controllers\Public\DesaDalamAngkaController;
+use App\Http\Controllers\Public\DesaPetaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -10,6 +11,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/profil-desa', [ProfilDesaController::class, 'Index'])->name("profil-desa");
 Route::get('/profil-desa', [ProfilDesaController::class, 'showProfilDesa'])->name('profil-desa');
 Route::get('/desa-dalam-angka', [DesaDalamAngkaController::class, 'index'])->name('desa-dalam-angka');
+Route::get('/desa-dalam-peta', [DesaPetaController::class, 'index'])->name('desa-dalam-peta');
 // Route::get('/pera-desa', [ProfilDesaController::class, 'showProfilDesa'])->name('profil-desa');
 
 
@@ -18,9 +20,9 @@ Route::get('/desa-dalam-angka', [DesaDalamAngkaController::class, 'index'])->nam
 //     return response()->json($desa);
 // })->name('getDesaByKecamatan');
 
-Route::middleware(['auth'])->group(function () {
-    Route::resource('transparansi', TransparansiController::class);
-});
+// Route::middleware(['auth'])->group(function () {
+//     Route::resource('transparansi', TransparansiController::class);
+// });
 
 Route::get('/storage/transparansi-docs/{filename}', function ($filename) {
     $path = "transparansi-docs/$filename";
